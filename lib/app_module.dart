@@ -1,8 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/features/Home/home_module.dart';
 import 'package:movie_app/features/Home/home_route.dart';
-import 'package:movie_app/features/details/detail_module.dart';
-import 'package:movie_app/features/details/detail_route.dart';
 
 class AppModule extends Module {
 
