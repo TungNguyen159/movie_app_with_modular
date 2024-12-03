@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/texthead.dart';
-import 'package:movie_app/config/api_link.dart';
+import 'package:movie_app/core/config/api_link.dart';
 
 class CastAndCrew extends StatelessWidget {
   const CastAndCrew({

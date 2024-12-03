@@ -22,7 +22,6 @@ class _SettingScreenState extends State<SettingScreen> {
           color: const Color.fromARGB(255, 2, 35, 62),
           
         ),
-        child: flutter,
       )
     );
   }

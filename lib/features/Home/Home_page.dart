@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_movie.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_thumnail.dart';
 import 'package:movie_app/Widgets/texthead.dart';
-import 'package:movie_app/config/handle_api.dart';
+import 'package:movie_app/core/config/handle_api.dart';
 import 'package:movie_app/models/movie.dart';
 
 class HomePage extends StatefulWidget {
