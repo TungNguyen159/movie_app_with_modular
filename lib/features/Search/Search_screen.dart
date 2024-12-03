@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/features/Search/widgets/custom_search.dart';
 import 'package:movie_app/features/Search/widgets/search_box.dart';
-import 'package:movie_app/core/config/handle_api.dart';
+import 'package:movie_app/config/handle_api.dart';
 import 'package:movie_app/models/movie.dart';
 
 class SearchScreen extends StatefulWidget {

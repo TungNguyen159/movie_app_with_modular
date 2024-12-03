@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/features/details/widgets/cast_and_crew.dart';
 import 'package:movie_app/features/details/widgets/custom_detail.dart';
-import 'package:movie_app/core/config/handle_api.dart';
+import 'package:movie_app/config/handle_api.dart';
 import 'package:movie_app/models/cast.dart';
 import 'package:movie_app/models/movie_detail.dart';
 

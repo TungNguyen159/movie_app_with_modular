@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movie_app/core/config/api_link.dart';
+import 'package:movie_app/config/api_link.dart';
 
 class CustomCardMovie extends StatelessWidget {
   const CustomCardMovie({
