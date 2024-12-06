@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/Widgets/app_elevated_button.dart';
 import 'package:movie_app/features/details/widgets/cast_and_crew.dart';
 import 'package:movie_app/features/details/widgets/custom_detail.dart';
 import 'package:movie_app/config/handle_api.dart';
@@ -29,7 +30,6 @@ class _DetailScreenState extends State<DetailScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: Colors.white,
-  
       ),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
@@ -74,7 +74,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   }
                 },
               ),
-            )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
+                AppElevatedButton(text: "Get ticket"),
+              ],
+            ),
           ],
         ),
       ),

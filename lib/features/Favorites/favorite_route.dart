@@ -1,3 +1,3 @@
 class FavoriteRoute {
-  static const root ="/favorite";
+  static const root = "/favorite/";
 }

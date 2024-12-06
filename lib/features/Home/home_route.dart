@@ -1,4 +1,4 @@
 class HomeRoute {
-  static const root = "/home";
+  static const root = "/home/";
   
 }

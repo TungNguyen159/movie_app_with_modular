@@ -8,6 +8,7 @@ class CastAndCrew extends StatelessWidget {
     required this.cast,
   });
   final List<dynamic> cast;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,51 +21,51 @@ class CastAndCrew extends StatelessWidget {
         children: [
           const TextHead(text: 'Cast'),
           const SizedBox(height: 20),
-          SizedBox(
-            height: 180,
-            child: ListView.builder(
-              itemCount: 10,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (ctx, index) {
-                return Container(
-                  margin: const EdgeInsets.only(right: 20),
-                  width: 90,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 100,
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.circular(20),
-                        //   image: DecorationImage(
-                        //     image: NetworkImage(
-                        //         '${keyLink.imagePath}${cast[index].profilePath}'),
-                        //     fit: BoxFit.cover,
-                        //   ),
-                        // ),
-                        child: CircleAvatar(
-                          radius: 50,
-                          backgroundImage:  NetworkImage(
-                                '${keyLink.imagePath}${cast[index].profilePath}'),
+          cast.isNotEmpty
+              ? SizedBox(
+                  height: 180,
+                  child: ListView.builder(
+                    itemCount: cast.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (ctx, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(right: 20),
+                        width: 90,
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                                radius: 50,
+                                backgroundImage: NetworkImage(
+                                  '${keyLink.imagePath}${cast[index].profilePath}',
+                                )),
+                            const SizedBox(height: 10),
+                            Text(
+                              cast[index].originalName ?? "Unknown",
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        cast[index].originalName,
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      )
-                    ],
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          )
+                )
+              : const Center(
+                  child: Text(
+                    "No cast available",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
         ],
       ),
     );

@@ -13,10 +13,10 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   int _currentIndex = 0;
   final List<String> _routes = [
-    "/home",
-    "/favorite",
-    "/search",
-    "/setting",
+    "/home/",
+    "/favorite/",
+    "/search/",
+    "/setting/",
   ];
   @override
   void initState() {
@@ -46,6 +46,7 @@ class _BottomBarState extends State<BottomBar> {
             selectedItemColor: Colors.white, // Selected item color
             unselectedItemColor: Colors.grey, // Unselected item color
             type: BottomNavigationBarType.fixed, // Keep labels visible
+            showUnselectedLabels: false,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),

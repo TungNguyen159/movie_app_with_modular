@@ -1,3 +1,3 @@
 class SettingRoute{
-  static const root = "/setting";
+  static const root = "/setting/";
 }

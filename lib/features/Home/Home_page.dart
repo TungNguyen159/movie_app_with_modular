@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/Widgets/app_elevated_button.dart';
+import 'package:movie_app/features/Home/popular.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_movie.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_thumnail.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/handle_api.dart';
+import 'package:movie_app/features/authentication/sign_in_screen.dart';
 import 'package:movie_app/models/movie.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,20 +47,26 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Hi Jack!',
                         style: TextStyle(
                           fontSize: 24,
                           color: Colors.white,
                         ),
                       ),
-                      CircleAvatar(
-                        radius: 26,
-                        backgroundImage: NetworkImage(
-                          'https://static.vecteezy.com/system/resources/thumbnails/007/209/020/small_2x/close-up-shot-of-happy-dark-skinned-afro-american-woman-laughs-positively-being-in-good-mood-dressed-in-black-casual-clothes-isolated-on-grey-background-human-emotions-and-feeligs-concept-photo.jpg',
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) => SignInScreen()));
+                        },
+                        child: const CircleAvatar(
+                          radius: 26,
+                          backgroundImage: NetworkImage(
+                            'https://static.vecteezy.com/system/resources/thumbnails/007/209/020/small_2x/close-up-shot-of-happy-dark-skinned-afro-american-woman-laughs-positively-being-in-good-mood-dressed-in-black-casual-clothes-isolated-on-grey-background-human-emotions-and-feeligs-concept-photo.jpg',
+                          ),
                         ),
                       ),
                     ],
@@ -128,6 +137,18 @@ class _HomePageState extends State<HomePage> {
                             return const CircularProgressIndicator();
                           }
                         }),
+                  ),
+                  Center(
+                    child: AppElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (ctx) => PopularScreen(),
+                          ),
+                        );
+                      },
+                     text: "See all",
+                    ),
                   ),
                 ],
               ),

@@ -81,12 +81,15 @@ class CustomDetail extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (var genres in snapshot.data.genres)
-                          _buildTag('${genres.name}'),
-                      ],
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          for (var genres in snapshot.data.genres)
+                            _buildTag('${genres.name}'),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Column(

@@ -1,3 +1,3 @@
 class SearchRoute {
-  static const root = "/search";
+  static const root = "/search/";
 }

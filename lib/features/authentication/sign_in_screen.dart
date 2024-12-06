@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/Widgets/app_elevated_button.dart';
 import 'package:movie_app/Widgets/text_field_app.dart';
 import 'package:movie_app/Widgets/text_head.dart';
+import 'package:movie_app/features/Home/Home_page.dart';
 import 'package:movie_app/features/authentication/sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -15,17 +17,24 @@ class SignInScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 50),
             child: Image.asset('actor_1.png'),
           ),
-          const Padding(
+          Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextFieldApp(
+                const TextFieldApp(
                   hintText: "Username",
                 ),
-                TextFieldApp(
+                const TextFieldApp(
                   hintText: "Password",
                 ),
+                AppElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) => HomePage()));
+                  },
+                  text: "login",
+                )
               ],
             ),
           ),

@@ -1,21 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/config/api_link.dart';
 
-class CustomCardMovie extends StatelessWidget {
-  const CustomCardMovie({
-    super.key,
-    required this.snapshot,
-  });
 
+class GridMovieItem extends StatelessWidget {
+  const GridMovieItem({super.key, required this.snapshot, });
   final AsyncSnapshot snapshot;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      height: MediaQuery.of(context).size.height * 0.25,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
+      child: GridView.builder(
+         gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
           return InkWell(
@@ -24,35 +22,31 @@ class CustomCardMovie extends StatelessWidget {
             },
             child: Stack(
               children: [
-                ClipRRect(
-                  child: Container(
-                    height: 210,
-                    width: 150,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          "${keyLink.imagePath}${snapshot.data[index].posterPath}",
-                        ),
-                        fit: BoxFit.cover,
-                      ),
+                Container(
+                  height: double.infinity,
+                  foregroundDecoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black.withOpacity(0.8),
+                        Colors.transparent,
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
                     ),
-                    foregroundDecoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.black.withOpacity(0.8),
-                          Colors.transparent,
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          "${keyLink.imagePath}${snapshot.data[index].posterPath}"),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 Positioned(
                   left: 15,
                   right: 15,
-                  bottom: 0,
+               bottom: 15,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
