@@ -1,14 +1,12 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/features/Home/Home_page.dart';
+import 'package:movie_app/features/Favorites/favorite.dart';
 import 'package:movie_app/router/main_route.dart';
 
-
-class HomeModule extends Module {
+class FavoriteModule extends Module {
   @override
   void binds(i) {}
   @override
   void routes(r) {
-    r.child(MainRoute.root, child: (ctx) => const HomePage());
-
+    r.child(MainRoute.root, child: (ctx) => const FavoriteScreen());
   }
 }

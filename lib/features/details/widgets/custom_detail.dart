@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/texthead.dart';
+import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
 
 class CustomDetail extends StatelessWidget {

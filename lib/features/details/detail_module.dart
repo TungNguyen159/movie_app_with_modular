@@ -8,8 +8,12 @@ class DetailModule extends Module {
     // TODO: implement binds
     super.binds(i);
   }
+
   @override
   void routes(RouteManager r) {
-    r.child("${DetailRoute.root}/:movieId", child: (ctx) => DetailScreen(movieId: int.parse(r.args.queryParams['movieId']!) ));
+    r.child(DetailRoute.rootId, child: (context) {
+      final movieId = r.args.params['movieId']; // Lấy movieId từ arguments
+      return DetailScreen(movieId: int.parse(movieId));
+    });
   }
 }

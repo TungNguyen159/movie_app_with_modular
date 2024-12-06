@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:go_router/go_router.dart';
 import 'package:movie_app/config/api_link.dart';
 
 class CustomCardMovie extends StatelessWidget {
@@ -21,7 +20,8 @@ class CustomCardMovie extends StatelessWidget {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              Modular.to.navigate("/home/detail/?movieId=${snapshot.data[index].id}");
+            
+              Modular.to.pushNamed("/detail/${snapshot.data[index].id}");
             },
             child: Stack(
               children: [

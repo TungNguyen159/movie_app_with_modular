@@ -28,9 +28,8 @@ class _DetailScreenState extends State<DetailScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        automaticallyImplyLeading: true,
         foregroundColor: Colors.white,
-        
+  
       ),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(

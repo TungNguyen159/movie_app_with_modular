@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/app_module.dart';
+import 'package:movie_app/features/Settings/settings.dart';
+import 'package:movie_app/features/authentication/sign_in_screen.dart';
 
 
 void main() {
-  runApp(ModularApp(module: AppModule(), child:const MyApp()));
+ // runApp(ModularApp(module: AppModule(), child:const MyApp()));
+ runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -19,7 +22,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         scaffoldBackgroundColor: Colors.black,
       ),
-      routerConfig: Modular.routerConfig,
+    //  routerConfig: Modular.routerConfig,
+    home: SignInScreen(),
     );
   }
 }

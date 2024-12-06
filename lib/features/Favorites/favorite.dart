@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/texthead.dart';
+import 'package:movie_app/Widgets/text_head.dart';
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
 

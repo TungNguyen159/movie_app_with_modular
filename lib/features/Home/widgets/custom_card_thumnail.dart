@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/config/api_link.dart';
 
 class CustomCardThumbnail extends StatelessWidget {
@@ -18,7 +18,7 @@ class CustomCardThumbnail extends StatelessWidget {
         itemBuilder: (context, index, pageViewIndex) {
           return InkWell(
             onTap: () {
-              context.go("/home/detail/${snapshot.data[index].id}");
+              Modular.to.pushNamed("/detail/${snapshot.data[index].id}");
             },
             child: Container(
               decoration: BoxDecoration(
@@ -39,7 +39,7 @@ class CustomCardThumbnail extends StatelessWidget {
         options: CarouselOptions(
           height: 400,
           autoPlay: true,
-          viewportFraction: 0.55,
+          viewportFraction: 0.7,
           autoPlayCurve: Curves.fastOutSlowIn,
           autoPlayAnimationDuration: const Duration(seconds: 2),
         ),

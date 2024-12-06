@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/texthead.dart';
+import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
 
 class CastAndCrew extends StatelessWidget {
@@ -32,15 +32,20 @@ class CastAndCrew extends StatelessWidget {
                   width: 90,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                            image: NetworkImage(
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.circular(20),
+                        //   image: DecorationImage(
+                        //     image: NetworkImage(
+                        //         '${keyLink.imagePath}${cast[index].profilePath}'),
+                        //     fit: BoxFit.cover,
+                        //   ),
+                        // ),
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage:  NetworkImage(
                                 '${keyLink.imagePath}${cast[index].profilePath}'),
-                            fit: BoxFit.cover,
-                          ),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -65,4 +70,3 @@ class CastAndCrew extends StatelessWidget {
     );
   }
 }
-

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:movie_app/Widgets/texthead.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
 
 class CustomSearch extends StatelessWidget {
@@ -21,7 +21,7 @@ class CustomSearch extends StatelessWidget {
                 width: double.infinity,
                 child: InkWell(
                   onTap: () {
-                    context.go("/search/searchDetails/${snapshot.data[index].id}");
+                    Modular.to.pushNamed("/detail/${snapshot.data[index].id}");
                   },
                   child: Row(
                     children: [
