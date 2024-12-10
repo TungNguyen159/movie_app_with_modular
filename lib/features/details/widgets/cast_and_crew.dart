@@ -37,7 +37,7 @@ class CastAndCrew extends StatelessWidget {
                             CircleAvatar(
                                 radius: 50,
                                 backgroundImage: NetworkImage(
-                                  '${keyLink.imagePath}${cast[index].profilePath}',
+                                  '${ApiLink.imagePath}${cast[index].profilePath}',
                                 )),
                             const SizedBox(height: 10),
                             Text(

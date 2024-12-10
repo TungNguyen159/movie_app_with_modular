@@ -14,7 +14,7 @@ class _BottomBarState extends State<BottomBar> {
   int _currentIndex = 0;
   final List<String> _routes = [
     "/home/",
-    "/favorite/",
+    "/ticket",
     "/search/",
     "/setting/",
   ];

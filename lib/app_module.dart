@@ -7,6 +7,8 @@ import 'package:movie_app/features/Search/search_module.dart';
 import 'package:movie_app/features/Search/search_route.dart';
 import 'package:movie_app/features/Settings/setting_module.dart';
 import 'package:movie_app/features/Settings/setting_route.dart';
+import 'package:movie_app/features/Tickets/ticket_module.dart';
+import 'package:movie_app/features/Tickets/ticket_route.dart';
 import 'package:movie_app/features/details/detail_module.dart';
 import 'package:movie_app/features/details/detail_route.dart';
 import 'package:movie_app/router/bottom_bar.dart';
@@ -26,6 +28,7 @@ class AppModule extends Module {
       ModuleRoute(SearchRoute.root, module: SearchModule()),
       ModuleRoute(FavoriteRoute.root, module: FavoriteModule()),
       ModuleRoute(SettingRoute.root, module: SettingModule()),
+      ModuleRoute(TicketRoute.root, module: TicketModule()),
     ]);
   }
 }

@@ -28,13 +28,23 @@ class SignInScreen extends StatelessWidget {
                 const TextFieldApp(
                   hintText: "Password",
                 ),
-                AppElevatedButton(
+                ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) => HomePage()));
+                      MaterialPageRoute(
+                        builder: (ctx) => HomePage(),
+                      ),
+                    );
                   },
-                  text: "login",
-                )
+                  child: const Text("login"),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(400, 60),
+                    backgroundColor: Colors.orange.withOpacity(0.2),
+                    foregroundColor: Colors.white,
+                    elevation: 5,
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  ),
+                ),
               ],
             ),
           ),
@@ -52,7 +62,7 @@ class SignInScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   )),
             ],
-          )
+          ),
         ],
       ),
     );

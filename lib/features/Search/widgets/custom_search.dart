@@ -28,7 +28,7 @@ class CustomSearch extends StatelessWidget {
                       Column(
                         children: [
                           Image.network(
-                            "${keyLink.imagePath}${snapshot.data[index].posterPath}",
+                            "${ApiLink.imagePath}${snapshot.data[index].posterPath}",
                             height: 120,
                             width: 100,
                           )

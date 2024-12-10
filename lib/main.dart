@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/app_module.dart';
-import 'package:movie_app/core/theme/app_color.dart';
 
 void main() {
   runApp(ModularApp(module: AppModule(), child: const MyApp()));

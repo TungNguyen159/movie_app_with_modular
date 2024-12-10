@@ -25,7 +25,7 @@ class CustomCardThumbnail extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
                       image: NetworkImage(
-                          "${keyLink.imagePath}${snapshot.data[index].posterPath}"),
+                          "${ApiLink.imagePath}${snapshot.data[index].posterPath}"),
                       fit: BoxFit.cover)),
               margin: const EdgeInsets.only(
                 left: 15,

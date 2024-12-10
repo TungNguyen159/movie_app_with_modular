@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/app_elevated_button.dart';
+import 'package:movie_app/Widgets/text_head.dart';
+import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/features/details/widgets/cast_and_crew.dart';
 import 'package:movie_app/features/details/widgets/custom_detail.dart';
-import 'package:movie_app/config/handle_api.dart';
 import 'package:movie_app/models/cast.dart';
 import 'package:movie_app/models/movie_detail.dart';
 
@@ -19,8 +20,8 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
-    movieDetails = controllerApi().fetchMovieDetail(widget.movieId);
-    movieCasts = controllerApi().fetchCasts(widget.movieId);
+    movieDetails = ControllerApi().fetchMovieDetail(widget.movieId);
+    movieCasts = ControllerApi().fetchCasts(widget.movieId);
   }
 
   @override
@@ -29,11 +30,12 @@ class _DetailScreenState extends State<DetailScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: Colors.white,
+        foregroundColor: Colors.blue,
       ),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               child: FutureBuilder(
@@ -73,6 +75,31 @@ class _DetailScreenState extends State<DetailScreen> {
                     return const Center(child: CircularProgressIndicator());
                   }
                 },
+              ),
+            ),
+            const TextHead(text: "Trailer"),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 20,
+              ),
+              child: SizedBox(
+                height: 150,
+                child: ListView.builder(
+                  itemCount: 5,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (ctx, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: 200,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.yellow),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
             Row(

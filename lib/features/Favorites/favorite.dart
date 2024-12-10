@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/core/theme/app_color.dart';
+
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
 
@@ -9,12 +10,13 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: TextHead(text: 'favorite'),
-      backgroundColor: AppColor.darkColorScheme.primary,
+      appBar: AppBar(
+        title: TextHead(text: 'favorite'),
+        backgroundColor: AppColor.darkColorScheme.primary,
+        centerTitle: true,
       ),
     );
   }

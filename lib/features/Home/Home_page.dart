@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/app_elevated_button.dart';
+import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/features/Home/popular.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_movie.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_thumnail.dart';
 import 'package:movie_app/Widgets/text_head.dart';
-import 'package:movie_app/config/handle_api.dart';
 import 'package:movie_app/features/authentication/sign_in_screen.dart';
 import 'package:movie_app/models/movie.dart';
 
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   late Future<List<Movies>> upComingMovie;
   late Future<List<Movies>> nowPlaying;
 
-  final controllerApis = controllerApi();
+  final controllerApis = ControllerApi();
 
   @override
   void initState() {
@@ -31,8 +31,8 @@ class _HomePageState extends State<HomePage> {
 
   void loadData() {
     popularMovie = controllerApis.getPopularMovie();
-    topRatedMovie = controllerApis.getListMovie();
-    upComingMovie = controllerApis.getUpcomingMovie();
+    topRatedMovie = controllerApis.getTopRatedMovie();
+    upComingMovie = controllerApis.getUpComingMovie();
     nowPlaying = controllerApis.getNowPlayingMovie();
   }
 

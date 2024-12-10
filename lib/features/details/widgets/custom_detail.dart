@@ -28,7 +28,7 @@ class CustomDetail extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(
-                          '${keyLink.imagePath}${snapshot.data.posterPath}'),
+                          '${ApiLink.imagePath}${snapshot.data.posterPath}'),
                       fit: BoxFit.cover),
                 ),
               ),

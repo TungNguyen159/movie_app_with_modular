@@ -30,14 +30,16 @@ class CustomCardMovie extends StatelessWidget {
                     width: 150,
                     margin: const EdgeInsets.symmetric(horizontal: 8),
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
                         image: NetworkImage(
-                          "${keyLink.imagePath}${snapshot.data[index].posterPath}",
+                          "${ApiLink.imagePath}${snapshot.data[index].posterPath}",
                         ),
                         fit: BoxFit.cover,
                       ),
                     ),
                     foregroundDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
                       gradient: LinearGradient(
                         colors: [
                           Colors.black.withOpacity(0.8),
@@ -52,7 +54,7 @@ class CustomCardMovie extends StatelessWidget {
                 Positioned(
                   left: 15,
                   right: 15,
-                  bottom: 0,
+                  bottom: 25,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
