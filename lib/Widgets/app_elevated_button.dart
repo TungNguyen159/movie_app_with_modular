@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppElevatedButton extends StatelessWidget {
-  const AppElevatedButton(
-      {super.key,
-      this.onPressed,
-      required this.text,
-      this.textColor = Colors.white,
-      this.bgColor = const Color.fromARGB(255, 26, 73, 111)});
+  const AppElevatedButton({
+    super.key,
+    this.onPressed,
+    required this.text,
+    this.textColor = Colors.white,
+    this.bgColor = const Color.fromARGB(255, 26, 73, 111),
+  });
 
   final Function()? onPressed;
   final String text;

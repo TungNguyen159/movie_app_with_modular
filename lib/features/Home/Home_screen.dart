@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/app_elevated_button.dart';
 import 'package:movie_app/config/api_handle.dart';
+import 'package:movie_app/core/theme/gap.dart';
 import 'package:movie_app/features/Home/popular.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_movie.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_thumnail.dart';
@@ -8,14 +9,14 @@ import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/features/authentication/sign_in_screen.dart';
 import 'package:movie_app/models/movie.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Movies>> popularMovie;
   late Future<List<Movies>> topRatedMovie;
   late Future<List<Movies>> upComingMovie;
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  Gap.mdHeight,
                   SizedBox(
                     child: FutureBuilder(
                         future: popularMovie,
@@ -87,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                           }
                         }),
                   ),
-                  const SizedBox(height: 15),
+                  Gap.mdHeight,
                   const TextHead(text: 'Top rated'),
                   SizedBox(
                     child: FutureBuilder(
@@ -104,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                           }
                         }),
                   ),
-                  const SizedBox(height: 15),
+                  Gap.mdHeight,
                   const TextHead(text: "Now playing"),
                   SizedBox(
                     child: FutureBuilder(
@@ -121,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                           }
                         }),
                   ),
-                  const SizedBox(height: 15),
+                  Gap.mdHeight,
                   const TextHead(text: "Upcoming"),
                   SizedBox(
                     child: FutureBuilder(
@@ -147,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-                     text: "See all",
+                      text: "See all",
                     ),
                   ),
                 ],

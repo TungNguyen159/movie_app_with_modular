@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/app_elevated_button.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/text_field_app.dart';
 import 'package:movie_app/Widgets/text_head.dart';
-import 'package:movie_app/features/Home/Home_page.dart';
+import 'package:movie_app/features/Home/Home_screen.dart';
 import 'package:movie_app/features/authentication/sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -30,20 +30,16 @@ class SignInScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (ctx) => HomePage(),
-                      ),
-                    );
+                    Modular.to.pushNamed("/");
                   },
-                  child: const Text("login"),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(400, 60),
                     backgroundColor: Colors.orange.withOpacity(0.2),
                     foregroundColor: Colors.white,
                     elevation: 5,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    padding:const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   ),
+                  child: const Text("login"),
                 ),
               ],
             ),

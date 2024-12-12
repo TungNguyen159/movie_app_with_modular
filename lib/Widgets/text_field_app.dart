@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class TextFieldApp extends StatelessWidget {
   const TextFieldApp({
-    Key? key,
+    super.key,
     this.hintText,
     this.suffixIcon,
-  }) : super(key: key);
+  });
   final String? hintText;
   final Widget? suffixIcon;
  @override

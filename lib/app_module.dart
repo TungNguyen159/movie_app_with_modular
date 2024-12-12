@@ -1,6 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/features/Favorites/favorite_module.dart';
-import 'package:movie_app/features/Favorites/favorite_route.dart';
 import 'package:movie_app/features/Home/home_module.dart';
 import 'package:movie_app/features/Home/home_route.dart';
 import 'package:movie_app/features/Search/search_module.dart';
@@ -26,7 +24,7 @@ class AppModule extends Module {
       ModuleRoute(HomeRoute.root, module: HomeModule()),
       ModuleRoute(DetailRoute.root, module: DetailModule()),
       ModuleRoute(SearchRoute.root, module: SearchModule()),
-      ModuleRoute(FavoriteRoute.root, module: FavoriteModule()),
+     // ModuleRoute(FavoriteRoute.root, module: FavoriteModule()),
       ModuleRoute(SettingRoute.root, module: SettingModule()),
       ModuleRoute(TicketRoute.root, module: TicketModule()),
     ]);

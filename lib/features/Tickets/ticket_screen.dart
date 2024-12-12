@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/app_elevated_button.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 
-class TicketPage extends StatefulWidget {
-  const TicketPage({super.key});
+class TicketScreen extends StatefulWidget {
+  const TicketScreen({super.key});
 
   @override
-  State<TicketPage> createState() => _TicketPageState();
+  State<TicketScreen> createState() => _TicketScreenState();
 }
 
-class _TicketPageState extends State<TicketPage> {
+class _TicketScreenState extends State<TicketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

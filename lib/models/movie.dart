@@ -39,8 +39,7 @@ class Movies {
         originalTitle: json["original_title"] ?? 'Unknown',
         overview: json["overview"] ?? 'Unknown',
         popularity: json["popularity"]?.toDouble() ?? 0.0,
-        posterPath: json["poster_path"] ??
-            '2cxhvwyEwRlysAmRH4iodkvo0z5.jpg',
+        posterPath: json["poster_path"] ??'',
         releaseDate: json["release_date"] ?? 'Unknown',
         title: json["title"] ?? 'Unknown',
         video: json["video"] ?? false,

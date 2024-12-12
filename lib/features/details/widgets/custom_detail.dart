@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
+import 'package:movie_app/core/image/image_app.dart';
 
 class CustomDetail extends StatelessWidget {
   const CustomDetail({super.key, required this.snapshot});
@@ -27,9 +28,12 @@ class CustomDetail extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.7,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(
-                          '${ApiLink.imagePath}${snapshot.data.posterPath}'),
-                      fit: BoxFit.cover),
+                    image: snapshot.data.posterPath.isNotEmpty
+                        ? NetworkImage(
+                            '${ApiLink.imagePath}${snapshot.data.posterPath}')
+                        : AssetImage(ImageApp.defaultImage),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
@@ -46,16 +50,18 @@ class CustomDetail extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TextHead(text: '${snapshot.data.originalTitle}',maxLines: 2,),
+                              TextHead(
+                                text: '${snapshot.data.originalTitle}',
+                                maxLines: 2,
+                              ),
                               const SizedBox(height: 5),
                               Container(
                                 decoration: BoxDecoration(
-                                  
                                   border: Border.all(
                                       color: Colors.white,
                                       width: 1.0,
                                       style: BorderStyle.solid),
-                                  borderRadius:const BorderRadius.all(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(10),
                                   ), //
                                 ),

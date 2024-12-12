@@ -13,7 +13,7 @@ class CastAndCrew extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: 20,
+        vertical: 10,
         horizontal: 20,
       ),
       child: Column(

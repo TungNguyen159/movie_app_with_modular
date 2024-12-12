@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
+import 'package:movie_app/core/image/image_app.dart';
 
 class CustomSearch extends StatelessWidget {
   const CustomSearch({super.key, required this.snapshot});
@@ -25,14 +26,25 @@ class CustomSearch extends StatelessWidget {
                   },
                   child: Row(
                     children: [
-                      Column(
-                        children: [
-                          Image.network(
-                            "${ApiLink.imagePath}${snapshot.data[index].posterPath}",
-                            height: 120,
-                            width: 100,
-                          )
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: Column(
+                          children: [
+                            Image.network(
+                              "${ApiLink.imagePath}${snapshot.data[index].posterPath}",
+                              height: 120,
+                              width: 100,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                  ImageApp.defaultImage, 
+                                  height: 120,
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                       Expanded(
                         child: Column(
