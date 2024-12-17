@@ -1,255 +1,90 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/app_elevated_button.dart';
-import 'package:movie_app/Widgets/text_head.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:movie_app/Widgets/app_button.dart';
+import 'package:movie_app/config/api_handle.dart';
+import 'package:movie_app/features/Seatplaces/seat_screen.dart';
+import 'package:movie_app/features/Tickets/widgets/date_selector.dart';
+import 'package:movie_app/features/Tickets/widgets/seat_selector.dart';
+import 'package:movie_app/features/Tickets/widgets/time_selector.dart';
 
 class TicketScreen extends StatefulWidget {
-  const TicketScreen({super.key});
+  const TicketScreen({super.key, required this.movieId});
+  final int movieId;
 
   @override
   State<TicketScreen> createState() => _TicketScreenState();
 }
 
 class _TicketScreenState extends State<TicketScreen> {
+  late Future<String> movietitle;
+
+  @override
+  void initState() {
+    super.initState();
+    movietitle = ControllerApi().getitle(widget.movieId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("name movie"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            date(),
-            time(),
-            room(),
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AppElevatedButton(text: "cancel"),
-                AppElevatedButton(text: "continue"),
-              ],
-            ),
-          ],
-        ),
+      appBar: _buildAppBar(), // Tách AppBar thành hàm riêng
+      body: Column(
+        children: [
+          DateSelector(), 
+          TimeSelector(),
+          Expanded(child: SeatSelector()),
+
+
+          _buildNextButton(context), 
+        ],
       ),
     );
   }
 
-  Column date() {
-    return Column(
-      children: [
-        TextHead(
-          text: "select a date",
-        ),
-        const SizedBox(height: 10),
-        Container(
-          height: 150,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.grey.withOpacity(0.2),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                  height: 100,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.white,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ), //
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextHead(text: "monday"),
-                        TextHead(text: "18"),
-                      ],
-                    ),
-                  )),
-              Container(
-                  height: 100,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.white,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ), //
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextHead(text: "monday"),
-                        TextHead(text: "18"),
-                      ],
-                    ),
-                  )),
-              Container(
-                  height: 100,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.white,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ), //
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextHead(text: "monday"),
-                        TextHead(text: "18"),
-                      ],
-                    ),
-                  )),
-            ],
-          ),
-        )
-      ],
+  // Hàm xây dựng AppBar
+  AppBar _buildAppBar() {
+    return AppBar(
+      elevation: 0,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+        onPressed: () {
+          Modular.to.pop();
+        },
+      ),
+      title: FutureBuilder<String>(
+        future: movietitle,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text("Loading..."); // Hiển thị khi đang tải
+          } else if (snapshot.hasError) {
+            return const Text("Error loading title"); // Lỗi
+          } else {
+            return Text(snapshot.data ?? "No Title", // In ra title
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold));
+          }
+        },
+      ),
     );
   }
 
-  Column time() {
-    return Column(
-      children: [
-        TextHead(
-          text: "select a time",
+  // Hàm xây dựng nút Next
+  Widget _buildNextButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Center(
+        child: AppButton(
+          text: "Next",
+          bgcolor: Colors.blue,
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (ctx) => const SeatScreen(),
+              ),
+            );
+          },
         ),
-        const SizedBox(height: 10),
-        Container(
-          height: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.grey.withOpacity(0.2),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.white,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ), //
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextHead(text: "7:00 PM"),
-                  )),
-              Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.white,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ), //
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextHead(text: "7:00 PM"),
-                  )),
-              Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.white,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ), //
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextHead(text: "7:00 PM"),
-                  )),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-
-  Column room() {
-    return Column(
-      children: [
-        TextHead(
-          text: "select a cinema",
-        ),
-        const SizedBox(height: 10),
-        Container(
-          height: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.grey.withOpacity(0.2),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.white,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ), //
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextHead(text: "2D"),
-                  )),
-              Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.white,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ), //
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextHead(text: "3D"),
-                  )),
-              Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.white,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ), //
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextHead(text: "IMAX"),
-                  )),
-            ],
-          ),
-        )
-      ],
+      ),
     );
   }
 }

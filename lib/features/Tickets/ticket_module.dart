@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:movie_app/features/Tickets/ticket_route.dart';
 import 'package:movie_app/features/Tickets/ticket_screen.dart';
-import 'package:movie_app/router/main_route.dart';
 
 class TicketModule extends Module {
   @override
@@ -11,6 +11,9 @@ class TicketModule extends Module {
   @override
   void routes(RouteManager r) {
     super.routes(r);
-    r.child(MainRoute.root, child: (ctx) => const TicketScreen());
+    r.child(TicketRoute.rootMovie, child: (context) {
+      final movieId = r.args.params["movieId"];
+      return TicketScreen(movieId: int.parse(movieId));
+    });
   }
 }

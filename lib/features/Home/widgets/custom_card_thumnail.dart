@@ -18,7 +18,7 @@ class CustomCardThumbnail extends StatelessWidget {
         itemBuilder: (context, index, pageViewIndex) {
           return InkWell(
             onTap: () {
-              Modular.to.pushNamed("/detail/${snapshot.data[index].id}");
+              Modular.to.pushNamed("/main/home/detail/${snapshot.data[index].id}");
             },
             child: Container(
               decoration: BoxDecoration(

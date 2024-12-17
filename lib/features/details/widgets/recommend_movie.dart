@@ -25,78 +25,60 @@ class RecommendScreen extends StatelessWidget {
                     itemCount: 5,
                     itemBuilder: (context, index) {
                       final movie = snapshot.data[index];
-                      return InkWell(
-                        onTap: () {
-                          Modular.to.pushNamed("/detail/${movie.id}");
-                        },
-                        child: Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                height: 150,
-                                width: 200,
-                                margin: const EdgeInsets.only(right: 10),
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: movie.backdropPath != null
-                                        ? NetworkImage(
-                                            "${ApiLink.imagePath}${movie.backdropPath}")
-                                        : AssetImage(ImageApp.defaultImage),
-                                    fit: BoxFit.cover,
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 15),
+                        child: InkWell(
+                          onTap: () {
+                            Modular.to.pushNamed("/main/home/detail/${movie.id}");
+                          },
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  height: 150,
+                                  width: 200,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: movie.backdropPath != null
+                                          ? NetworkImage(
+                                              "${ApiLink.imagePath}${movie.backdropPath}")
+                                          : AssetImage(ImageApp.defaultImage),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Positioned(
-                              left: 20,
-                              right: 15,
-                              bottom: 5,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          movie.originalTitle ??
-                                              "Unknown Title",
-                                          maxLines: 1,
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
+                              Positioned(
+                                left: 20,
+                                right: 15,
+                                bottom: 5,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            movie.originalTitle ??
+                                                "Unknown Title",
+                                            maxLines: 1,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.white,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              movie.voteAverage?.toString() ??
-                                                  "N/A",
-                                              maxLines: 1,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 13,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 5),
-                                            const Icon(
-                                              Icons.star,
-                                              size: 15,
-                                              color: Colors.yellow,
-                                            ),
-                                          ],
-                                        )
-                                      ],
+                                          const SizedBox(height: 5),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       );
                     },

@@ -16,13 +16,14 @@ class CustomSearch extends StatelessWidget {
         child: ListView.builder(
           itemCount: snapshot.data.length,
           itemBuilder: (ctx, index) {
+            final data = snapshot.data[index];
             return Padding(
               padding: const EdgeInsets.only(top: 8),
               child: SizedBox(
                 width: double.infinity,
                 child: InkWell(
                   onTap: () {
-                    Modular.to.pushNamed("/detail/${snapshot.data[index].id}");
+                    Modular.to.pushNamed("/main/search/detail/${data.id}");
                   },
                   child: Row(
                     children: [
@@ -31,7 +32,7 @@ class CustomSearch extends StatelessWidget {
                         child: Column(
                           children: [
                             Image.network(
-                              "${ApiLink.imagePath}${snapshot.data[index].posterPath}",
+                              "${ApiLink.imagePath}${data.posterPath}",
                               height: 120,
                               width: 100,
                               errorBuilder: (context, error, stackTrace) {
@@ -51,7 +52,7 @@ class CustomSearch extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              snapshot.data[index].originalTitle,
+                              data.originalTitle,
                               style: const TextStyle(
                                   fontSize: 14, color: Colors.white),
                               overflow: TextOverflow.ellipsis,
@@ -72,7 +73,7 @@ class CustomSearch extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: TextHead(
                                   text:
-                                      'Release Date ${snapshot.data[index].releaseDate}',
+                                      'Release Date ${data.releaseDate}',
                                   fontSize: 11,
                                 ),
                               ),

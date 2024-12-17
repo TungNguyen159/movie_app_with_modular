@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: dartkTheme,
-      routerConfig: Modular.routerConfig,
+      routerDelegate: Modular.routerDelegate,
+      routeInformationParser: Modular.routeInformationParser,
       //home: SignInScreen(),
     );
   }

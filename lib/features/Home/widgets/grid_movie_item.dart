@@ -15,7 +15,7 @@ class GridMovieItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: InkWell(
         onTap: () {
-          Modular.to.pushNamed("/detail/${movies.id}");
+          Modular.to.pushNamed("/main/home/detail/${movies.id}");
         },
         child: Stack(
           children: [

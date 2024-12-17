@@ -48,11 +48,19 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     );
                   } else if (snapshot.hasData) {
+                    if (snapshot.data!.isEmpty) {
+                      return const Center(
+                        child: Text(
+                          "Không có dữ liệu",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      );
+                    }
                     return CustomSearch(snapshot: snapshot);
                   }
                   return const Center(
                       child: Text(
-                    "Không có dữ liệu",
+                    "search your movies",
                     style: TextStyle(color: Colors.white),
                   ));
                 },

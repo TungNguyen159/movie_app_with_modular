@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/text_field_app.dart';
 import 'package:movie_app/Widgets/text_head.dart';
-import 'package:movie_app/features/Home/Home_screen.dart';
 import 'package:movie_app/features/authentication/sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -14,7 +13,7 @@ class SignInScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 50),
+            padding:const EdgeInsets.symmetric(vertical: 50),
             child: Image.asset('actor_1.png'),
           ),
           Padding(
@@ -30,7 +29,7 @@ class SignInScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Modular.to.pushNamed("/");
+                    Modular.to.navigate("/");
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(400, 60),

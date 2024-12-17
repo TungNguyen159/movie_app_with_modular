@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({
-    super.key,
-  });
+  const BottomBar({super.key});
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
@@ -13,24 +11,23 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   int _currentIndex = 0;
   final List<String> _routes = [
-    "/home/",
-    "/ticket/",
-    "/search/",
-    "/setting/",
+    "/main/home/",
+    "/main/onshowing/",
+    "/main/search/",
+    "/main/favorite/",
+    "/main/setting/",
   ];
   @override
   void initState() {
     super.initState();
-    Modular.to
-        .navigate(_routes[_currentIndex]);
+    Modular.to.navigate(_routes[_currentIndex]);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:const RouterOutlet(),
+      body: RouterOutlet(),
       bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.circular(20), // Rounded corners if needed
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Blur effect
           child: BottomNavigationBar(
@@ -53,12 +50,16 @@ class _BottomBarState extends State<BottomBar> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                label: 'Favorite',
+                icon: Icon(Icons.ondemand_video_outlined),
+                label: 'Onshowing',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'Search',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.favorite),
+                label: 'Favorite',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),

@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/features/Home/Home_screen.dart';
+import 'package:movie_app/features/Home/home_screen.dart';
 import 'package:movie_app/router/main_route.dart';
 
 

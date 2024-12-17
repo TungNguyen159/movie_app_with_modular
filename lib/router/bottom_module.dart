@@ -5,6 +5,8 @@
 // import 'package:movie_app/features/Settings/settings.dart';
 // import 'package:movie_app/router/bottom_bar.dart';
 
+//import 'package:flutter_modular/flutter_modular.dart';
+
 // class BottomModule extends Module {
 //   List<ModularRoute> get router => [
 //   ChildRoute(Modular.initialRoute, child: (ctx) => const BottomBar()),

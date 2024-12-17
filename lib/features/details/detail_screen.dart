@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/app_elevated_button.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_handle.dart';
@@ -34,7 +35,12 @@ class _DetailScreenState extends State<DetailScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: Colors.blue,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            Modular.to.pop();
+          },
+        ),
       ),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
@@ -127,7 +133,14 @@ class _DetailScreenState extends State<DetailScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
-                AppElevatedButton(text: "Get ticket"),
+                AppElevatedButton(
+                  text: "Get ticket",
+                  onPressed: () {
+                    Modular.to.pushNamed(
+                      '/main/home/detail/${widget.movieId}/ticket', 
+                    );
+                  },
+                ),
               ],
             ),
           ],

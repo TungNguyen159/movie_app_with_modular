@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/app_elevated_button.dart';
 import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/core/theme/gap.dart';
@@ -6,7 +7,6 @@ import 'package:movie_app/features/Home/popular.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_movie.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_thumnail.dart';
 import 'package:movie_app/Widgets/text_head.dart';
-import 'package:movie_app/features/authentication/sign_in_screen.dart';
 import 'package:movie_app/models/movie.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -60,8 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (ctx) => SignInScreen()));
+                           Modular.to.navigate("/authen/");
                         },
                         child: const CircleAvatar(
                           radius: 26,
