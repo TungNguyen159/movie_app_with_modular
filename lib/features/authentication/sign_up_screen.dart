@@ -12,11 +12,11 @@ class SignUpScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 50),
+            padding: const EdgeInsets.symmetric(vertical: 50),
             child: Image.asset('actor_1.png'),
           ),
           const Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -38,13 +38,13 @@ class SignUpScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextHead(text: "i already have account "),
+              const TextHead(text: "i already have account "),
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) => SignInScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => const SignInScreen()));
                   },
-                  child: Text(
+                  child: const Text(
                     "Login",
                     style: TextStyle(color: Colors.white),
                   )),

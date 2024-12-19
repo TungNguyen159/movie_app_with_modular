@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/features/Home/widgets/grid_movie_item.dart';
@@ -33,8 +34,6 @@ class _PopularScreenState extends State<PopularScreen> {
         getMovie.addAll(movies); // Thêm dữ liệu vào danh sách
         pages++; // Tăng số trang
       });
-    } catch (e) {
-      print('Error');
     } finally {
       setState(() => isLoading = false); // Kết thúc tải
     }
@@ -50,6 +49,13 @@ class _PopularScreenState extends State<PopularScreen> {
           fontSize: 20,
         ),
         foregroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            Modular.to.navigate("/main");
+            //Modular.to.pop();
+          },
+        ),
       ),
       body: NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification scrollInfo) {
@@ -60,12 +66,13 @@ class _PopularScreenState extends State<PopularScreen> {
           return true;
         },
         child: getMovie.isEmpty && isLoading
-            ? const Center(child: CircularProgressIndicator()) // Hiển thị loading ban đầu
+            ? const Center(
+                child: CircularProgressIndicator()) // Hiển thị loading ban đầu
             : GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 7,
+                  mainAxisSpacing: 7,
                   childAspectRatio: 0.7,
                 ),
                 itemCount: getMovie.length + (isLoading ? 1 : 0),

@@ -28,7 +28,7 @@ class TextFieldApp extends StatelessWidget {
           border: InputBorder.none,
           suffixIcon: suffixIcon,
           suffixIconColor: Colors.white,
-          hintStyle: TextStyle(
+          hintStyle:const TextStyle(
             color:Colors.black,
           ),
         ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/app_button.dart';
 import 'package:movie_app/config/api_handle.dart';
-import 'package:movie_app/features/Seatplaces/seat_screen.dart';
+import 'package:movie_app/features/Checking/Checking_screen.dart';
 import 'package:movie_app/features/Tickets/widgets/date_selector.dart';
 import 'package:movie_app/features/Tickets/widgets/seat_selector.dart';
 import 'package:movie_app/features/Tickets/widgets/time_selector.dart';
@@ -30,9 +30,9 @@ class _TicketScreenState extends State<TicketScreen> {
       appBar: _buildAppBar(), // Tách AppBar thành hàm riêng
       body: Column(
         children: [
-          DateSelector(), 
-          TimeSelector(),
-          Expanded(child: SeatSelector()),
+          const DateSelector(), 
+          const TimeSelector(),
+          const Expanded(child: SeatSelector()),
 
 
           _buildNextButton(context), 
@@ -79,7 +79,7 @@ class _TicketScreenState extends State<TicketScreen> {
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (ctx) => const SeatScreen(),
+                builder: (ctx) => const SeatScreen(movie: {},),
               ),
             );
           },

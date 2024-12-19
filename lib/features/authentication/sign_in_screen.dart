@@ -46,13 +46,13 @@ class SignInScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextHead(text: "no account? "),
+              const TextHead(text: "no account? "),
               TextButton(
                   onPressed: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) => SignUpScreen()));
+                        MaterialPageRoute(builder: (ctx) =>const SignUpScreen()));
                   },
-                  child: Text(
+                  child:const Text(
                     "Create account!",
                     style: TextStyle(color: Colors.white),
                   )),

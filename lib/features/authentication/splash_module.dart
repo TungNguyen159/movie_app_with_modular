@@ -5,6 +5,6 @@ import 'package:movie_app/router/main_route.dart';
 class SplashModule extends Module{
   @override
   void routes(RouteManager r) {
-    r.child(MainRoute.root, child: (ctx) => SplashLogic());
+    r.child(MainRoute.root, child: (ctx) =>const SplashLogic());
   }
 }

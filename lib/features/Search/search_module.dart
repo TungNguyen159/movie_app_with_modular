@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/features/Search/Search_screen.dart';
+import 'package:movie_app/features/Search/search_screen.dart';
 import 'package:movie_app/router/main_route.dart';
 
 class SearchModule extends Module {

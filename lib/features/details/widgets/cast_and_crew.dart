@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
+import 'package:movie_app/core/image/image_app.dart';
 
 class CastAndCrew extends StatelessWidget {
   const CastAndCrew({
@@ -35,10 +36,12 @@ class CastAndCrew extends StatelessWidget {
                         child: Column(
                           children: [
                             CircleAvatar(
-                                radius: 50,
-                                backgroundImage: NetworkImage(
-                                  '${ApiLink.imagePath}${cast[index].profilePath}',
-                                )),
+                              radius: 50,
+                              backgroundImage: cast[index].profilePath.isNotEmpty
+                                  ? NetworkImage(
+                                      '${ApiLink.imagePath}${cast[index].profilePath}')
+                                  : AssetImage(ImageApp.defaultImage),
+                            ),
                             const SizedBox(height: 10),
                             Text(
                               cast[index].originalName ?? "Unknown",

@@ -32,14 +32,16 @@ class Movies {
   });
   factory Movies.fromJson(Map<String, dynamic> json) => Movies(
         adult: json["adult"] ?? false,
-        backdropPath: json["backdrop_path"] ?? 'Unknown',
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        backdropPath: json["backdrop_path"] ?? '',
+        genreIds: json["genre_ids"] != null
+            ? List<int>.from(json["genre_ids"].map((x) => x))
+            : [],
         id: json["id"] ?? 0,
         originalLanguage: json["original_language"] ?? 'Unknown',
         originalTitle: json["original_title"] ?? 'Unknown',
         overview: json["overview"] ?? 'Unknown',
         popularity: json["popularity"]?.toDouble() ?? 0.0,
-        posterPath: json["poster_path"] ??'',
+        posterPath: json["poster_path"] ?? '',
         releaseDate: json["release_date"] ?? 'Unknown',
         title: json["title"] ?? 'Unknown',
         video: json["video"] ?? false,
@@ -52,7 +54,7 @@ class Movies {
         "backdrop_path": backdropPath,
         "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
         "id": id,
-        "original_language": [originalLanguage],
+        "original_language": originalLanguage,
         "original_title": originalTitle,
         "overview": overview,
         "popularity": popularity,

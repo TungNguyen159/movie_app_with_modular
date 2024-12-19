@@ -4,7 +4,10 @@ import 'package:movie_app/router/main_route.dart';
 
 class AuthenModule extends Module {
   @override
-  void binds(i) {}
+  void binds(Injector i) {
+    // TODO: implement binds
+    super.binds(i);
+  }
 
   @override
   void routes(r) {

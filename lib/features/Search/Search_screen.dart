@@ -1,3 +1,4 @@
+import 'dart:async'; // Để sử dụng debounce
 import 'package:flutter/material.dart';
 import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/features/Search/widgets/custom_search.dart';
@@ -14,12 +15,20 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   Future<List<Movies>> searchInfo = Future.value([]);
   final searchController = TextEditingController();
+  final searchFocusNode = FocusNode(); // Tạo FocusNode để quản lý focus
   final controllerApis = ControllerApi();
   void _search(String value) {
     value = value.toLowerCase();
-    setState(() {
-      searchInfo = controllerApis.searchMovie(value);
-    });
+      setState(() {
+        searchInfo = controllerApis.searchMovie(value);
+      });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose(); 
+    searchFocusNode.dispose(); 
+    super.dispose();
   }
 
   @override
@@ -31,6 +40,7 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             SearchBox(
               controller: searchController,
+              focusNode: searchFocusNode, 
               onChanged: _search,
             ),
             const SizedBox(height: 20),
@@ -59,10 +69,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     return CustomSearch(snapshot: snapshot);
                   }
                   return const Center(
-                      child: Text(
-                    "search your movies",
-                    style: TextStyle(color: Colors.white),
-                  ));
+                    child: Text(
+                      "Không có dữ liệu",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  );
                 },
               ),
             ),

@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/app_elevated_button.dart';
 import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/core/theme/gap.dart';
-import 'package:movie_app/features/Home/popular.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_movie.dart';
 import 'package:movie_app/features/Home/widgets/custom_card_thumnail.dart';
 import 'package:movie_app/Widgets/text_head.dart';
@@ -17,10 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<Movies>> popularMovie;
-  late Future<List<Movies>> topRatedMovie;
-  late Future<List<Movies>> upComingMovie;
-  late Future<List<Movies>> nowPlaying;
+  late final Future<List<Movies>> popularMovie;
+  late final Future<List<Movies>> topRatedMovie;
+  late final Future<List<Movies>> upComingMovie;
+  late final Future<List<Movies>> nowPlaying;
 
   final controllerApis = ControllerApi();
 
@@ -60,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                           Modular.to.navigate("/authen/");
+                          Modular.to.navigate("/authen/");
                         },
                         child: const CircleAvatar(
                           radius: 26,
@@ -141,11 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Center(
                     child: AppElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (ctx) => PopularScreen(),
-                          ),
-                        );
+                        Modular.to.navigate("/main/seeAll");
                       },
                       text: "See all",
                     ),

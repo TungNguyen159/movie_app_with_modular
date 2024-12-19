@@ -29,7 +29,7 @@ class RecommendScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 15),
                         child: InkWell(
                           onTap: () {
-                            Modular.to.pushNamed("/main/home/detail/${movie.id}");
+                            Modular.to.pushNamed("/main/detail/${movie.id}");
                           },
                           child: Stack(
                             children: [

@@ -1,6 +1,11 @@
 import 'dart:ui'; // Needed for BackdropFilter
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:movie_app/features/Checking/Checking_screen.dart';
+import 'package:movie_app/features/Notifications/notification_screen.dart';
+import 'package:movie_app/features/Home/home_screen.dart';
+import 'package:movie_app/features/Onshowing/onshowing_screen.dart';
+import 'package:movie_app/features/Search/search_screen.dart';
+import 'package:movie_app/features/Settings/setting_screen.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -10,23 +15,21 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   int _currentIndex = 0;
-  final List<String> _routes = [
-    "/main/home/",
-    "/main/onshowing/",
-    "/main/search/",
-    "/main/favorite/",
-    "/main/setting/",
+  final List<Widget> _screen = [
+    const HomeScreen(),
+    const OnshowingScreen(),
+    const SearchScreen(),
+    const SeatScreen(movie: {},),
+    const SettingScreen(),
   ];
-  @override
-  void initState() {
-    super.initState();
-    Modular.to.navigate(_routes[_currentIndex]);
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RouterOutlet(),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _screen,
+      ),
       bottomNavigationBar: ClipRRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Blur effect
@@ -35,11 +38,10 @@ class _BottomBarState extends State<BottomBar> {
               setState(() {
                 _currentIndex = index;
               });
-              Modular.to.navigate(_routes[index]);
             },
             currentIndex: _currentIndex,
             backgroundColor:
-                Colors.black.withOpacity(0.5), // Semi-transparent background
+                Colors.black, // Semi-transparent background
             selectedItemColor: Colors.white, // Selected item color
             unselectedItemColor: Colors.grey, // Unselected item color
             type: BottomNavigationBarType.fixed, // Keep labels visible
@@ -58,8 +60,8 @@ class _BottomBarState extends State<BottomBar> {
                 label: 'Search',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                label: 'Favorite',
+                icon: Icon(Icons.notifications),
+                label: 'Notification',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),

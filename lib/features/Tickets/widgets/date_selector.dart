@@ -10,7 +10,7 @@ class DateSelector extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: Column(
         children: [
-          TextHead(
+          const TextHead(
             text: "select a date",
           ),
           const SizedBox(height: 10),

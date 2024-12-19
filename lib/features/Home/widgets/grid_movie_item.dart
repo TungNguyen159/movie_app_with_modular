@@ -12,10 +12,10 @@ class GridMovieItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       child: InkWell(
         onTap: () {
-          Modular.to.pushNamed("/main/home/detail/${movies.id}");
+          Modular.to.pushNamed("/main/detail/${movies.id}");
         },
         child: Stack(
           children: [

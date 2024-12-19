@@ -19,7 +19,7 @@ class SplashLogic extends StatelessWidget {
       // }
     });
 
-    return SplashScreen();
+    return const SplashScreen();
   }
 
   Future<bool> checkAuthentication() async {

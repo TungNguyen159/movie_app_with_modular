@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/features/Seatplaces/seat_screen.dart';
+import 'package:movie_app/features/Checking/checking_screen.dart';
 
 class SeatModule extends Module{
   @override
@@ -9,6 +9,6 @@ class SeatModule extends Module{
   }
   @override
   void routes(RouteManager r) {
-    r.child("", child: (context) => const SeatScreen());
+    r.child("", child: (context) => const SeatScreen(movie: {}));
   }
 }

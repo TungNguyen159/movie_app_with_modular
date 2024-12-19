@@ -14,16 +14,16 @@ class CustomDetail extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                foregroundDecoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.black.withOpacity(0.8),
-                      Colors.transparent,
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
-                ),
+                // foregroundDecoration: BoxDecoration(
+                //   gradient: LinearGradient(
+                //     colors: [
+                //       Colors.black.withOpacity(0.8),
+                //       Colors.transparent,
+                //     ],
+                //     begin: Alignment.bottomCenter,
+                //     end: Alignment.topCenter,
+                //   ),
+                // ),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.7,
                 decoration: BoxDecoration(

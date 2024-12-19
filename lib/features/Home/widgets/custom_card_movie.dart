@@ -20,7 +20,7 @@ class CustomCardMovie extends StatelessWidget {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              Modular.to.pushNamed("/main/home/detail/${snapshot.data[index].id}");
+              Modular.to.pushNamed("/main/detail/${snapshot.data[index].id}");
             },
             child: Stack(
               children: [

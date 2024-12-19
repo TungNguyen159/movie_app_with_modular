@@ -7,11 +7,11 @@ class SeatSelectionWidget extends StatelessWidget {
   final List<Seat> selectedSeats; // Danh sách các ghế đã chọn
 
   const SeatSelectionWidget({
-    Key? key,
+    super.key,
     required this.rows,
     required this.columns,
     required this.selectedSeats,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +42,10 @@ class SeatWidget extends StatelessWidget {
   final bool isSelected;
 
   const SeatWidget({
-    Key? key,
+    super.key,
     required this.seatNumber,
     this.isSelected = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class Seat {
 
 
 class SeatSelector extends StatelessWidget {
-  const SeatSelector({Key? key}) : super(key: key);
+  const SeatSelector({super.key});
 
   @override
   Widget build(BuildContext context) {
