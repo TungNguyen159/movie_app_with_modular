@@ -29,7 +29,7 @@ class SignInScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Modular.to.navigate("/");
+                    Modular.to.navigate("/main");
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(400, 60),

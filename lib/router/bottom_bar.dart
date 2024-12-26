@@ -1,11 +1,10 @@
 import 'dart:ui'; // Needed for BackdropFilter
 import 'package:flutter/material.dart';
-import 'package:movie_app/features/Checking/Checking_screen.dart';
-import 'package:movie_app/features/Notifications/notification_screen.dart';
-import 'package:movie_app/features/Home/home_screen.dart';
+import 'package:movie_app/features/Yourbooking/Booked_screen.dart';
+import 'package:movie_app/features/Home/screens/home_screen.dart';
 import 'package:movie_app/features/Onshowing/onshowing_screen.dart';
 import 'package:movie_app/features/Search/search_screen.dart';
-import 'package:movie_app/features/Settings/setting_screen.dart';
+import 'package:movie_app/features/Settings/screen/setting_screen.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -19,7 +18,7 @@ class _BottomBarState extends State<BottomBar> {
     const HomeScreen(),
     const OnshowingScreen(),
     const SearchScreen(),
-    const SeatScreen(movie: {},),
+    const BookedScreen(),
     const SettingScreen(),
   ];
 
@@ -60,8 +59,8 @@ class _BottomBarState extends State<BottomBar> {
                 label: 'Search',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.notifications),
-                label: 'Notification',
+                icon: Icon(Icons.book_online),
+                label: 'Your Booking',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),

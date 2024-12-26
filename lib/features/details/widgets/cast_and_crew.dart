@@ -37,22 +37,18 @@ class CastAndCrew extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               radius: 50,
-                              backgroundImage: cast[index].profilePath.isNotEmpty
+                              backgroundImage: cast[index]
+                                      .profilePath
+                                      .isNotEmpty
                                   ? NetworkImage(
                                       '${ApiLink.imagePath}${cast[index].profilePath}')
                                   : AssetImage(ImageApp.defaultImage),
                             ),
                             const SizedBox(height: 10),
-                            Text(
-                              cast[index].originalName ?? "Unknown",
-                              maxLines: 2,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            )
+                            Text(cast[index].originalName ?? "Unknown",
+                                maxLines: 2,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.titleMedium!)
                           ],
                         ),
                       );

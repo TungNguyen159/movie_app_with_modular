@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
 import 'package:movie_app/core/image/image_app.dart';
+import 'package:movie_app/core/theme/gap.dart';
+import 'package:movie_app/core/theme/radius.dart';
 
 class CustomDetail extends StatelessWidget {
   const CustomDetail({super.key, required this.snapshot});
@@ -36,9 +38,9 @@ class CustomDetail extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              Gap.smHeight,
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: Gap.mL),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -53,24 +55,36 @@ class CustomDetail extends StatelessWidget {
                               TextHead(
                                 text: '${snapshot.data.originalTitle}',
                                 maxLines: 2,
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
-                              const SizedBox(height: 5),
+                              Gap.xsHeight,
                               Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Colors.white,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary,
                                       width: 1.0,
                                       style: BorderStyle.solid),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(10),
-                                  ), //
+                                  borderRadius: radius8,
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(Gap.sm),
                                   child: TextHead(
-                                      text:
-                                          'Release Date ${snapshot.data.releaseDate}',
-                                      fontSize: 16),
+                                    text:
+                                        'Release Date ${snapshot.data.releaseDate}',
+                                    textStyle: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
                                 ),
                               ),
                             ],
@@ -78,7 +92,16 @@ class CustomDetail extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            TextHead(text: '${snapshot.data.voteAverage}'),
+                            TextHead(
+                              text: '${snapshot.data.voteAverage}',
+                              textStyle: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                            ),
                             const Icon(
                               Icons.star,
                               color: Colors.yellow,
@@ -97,16 +120,12 @@ class CustomDetail extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    Gap.smHeight,
                     Column(
                       children: [
                         Text(
                           '${snapshot.data.overview}',
-                          style: const TextStyle(
-                            color: Colors.white70,
-                            height: 1.5,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ],
                     )
@@ -122,14 +141,14 @@ class CustomDetail extends StatelessWidget {
 
   Widget _buildTag(String title) {
     return Container(
-      margin: const EdgeInsets.only(top: 20, right: 5),
+      margin: const EdgeInsets.only(top: Gap.mL, right: Gap.xs),
       padding: const EdgeInsets.symmetric(
-        vertical: 8,
-        horizontal: 20,
+        vertical: Gap.sm,
+        horizontal: Gap.mL,
       ),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 117, 91, 121),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: radius20,
       ),
       child: Text(
         title,

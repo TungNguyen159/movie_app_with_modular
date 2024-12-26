@@ -4,20 +4,26 @@ class TextHead extends StatelessWidget {
   const TextHead({
     super.key,
     required this.text,
-    this.fontSize = 20,
     this.maxLines = 1,
+    this.textStyle,
   });
+
   final String text;
-  final double fontSize;
+  final TextStyle? textStyle; // Make textStyle nullable
   final int maxLines;
+
   @override
   Widget build(BuildContext context) {
+    final TextStyle defaultTextStyle = textStyle ??
+        Theme.of(context)
+            .textTheme
+            .titleLarge!
+            .copyWith(fontWeight: FontWeight.bold);
+
     return Text(
       text,
-      style: TextStyle(
-          color: Colors.white, fontSize: fontSize, fontWeight: FontWeight.bold),
+      style: defaultTextStyle,
       maxLines: maxLines,
-      
     );
   }
 }

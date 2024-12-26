@@ -5,17 +5,15 @@ class AppButton extends StatelessWidget {
     super.key,
     this.onPressed,
     required this.text,
-    this.bgcolor,
 
   });
   final Function()? onPressed;
   final String text;
-  final Color? bgcolor;
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: bgcolor,
+        color: Theme.of(context).colorScheme.primary,
       ),
       child: InkWell(
         onTap: onPressed,

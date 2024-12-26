@@ -14,7 +14,7 @@ class CustomSearch extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         width: double.infinity,
         child: ListView.builder(
-          itemCount: snapshot.data.length,
+          itemCount: 10,
           itemBuilder: (ctx, index) {
             final data = snapshot.data[index];
             return Padding(
@@ -37,7 +37,7 @@ class CustomSearch extends StatelessWidget {
                               width: 100,
                               errorBuilder: (context, error, stackTrace) {
                                 return Image.asset(
-                                  ImageApp.defaultImage, 
+                                  ImageApp.defaultImage,
                                   height: 120,
                                   width: 100,
                                   fit: BoxFit.cover,
@@ -72,9 +72,13 @@ class CustomSearch extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TextHead(
-                                  text:
-                                      'Release Date ${data.releaseDate}',
-                                  fontSize: 11,
+                                  text: 'Release Date ${data.releaseDate}',
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium!
+                                      .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
                               ),
                             ),

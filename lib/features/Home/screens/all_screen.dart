@@ -43,20 +43,21 @@ class _PopularScreenState extends State<PopularScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
         title: const TextHead(
           text: "All movies",
-          fontSize: 20,
         ),
-        foregroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),
           onPressed: () {
             Modular.to.navigate("/main");
             //Modular.to.pop();
           },
         ),
       ),
+      //list all movies
       body: NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification scrollInfo) {
           if (!isLoading &&

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/Widgets/app_button.dart';
 import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/features/details/widgets/cast_and_crew.dart';
 import 'package:movie_app/features/details/widgets/custom_detail.dart';
 import 'package:movie_app/features/details/widgets/recommend_movie.dart';
 import 'package:movie_app/features/details/widgets/videos_list.dart';
+import 'package:movie_app/home.dart';
 import 'package:movie_app/models/cast.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/models/movie_detail.dart';
@@ -35,10 +34,11 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         elevation: 0,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon: Icon(Icons.arrow_back_ios,
+              color: Theme.of(context).colorScheme.primary),
           onPressed: () {
             // Modular.to.navigate("/main/home/");
             Modular.to.pop();
@@ -58,7 +58,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     return Center(
                       child: Text(
                         snapshot.error.toString(),
-                        style: const TextStyle(color: Colors.red),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Theme.of(context).colorScheme.error,
+                            ),
                       ),
                     );
                   } else if (snapshot.hasData || snapshot.data != null) {
@@ -77,7 +79,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     return Center(
                       child: Text(
                         snapshot.error.toString(),
-                        style: const TextStyle(color: Colors.red),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Theme.of(context).colorScheme.error,
+                            ),
                       ),
                     );
                   } else if (snapshot.hasData) {
@@ -110,30 +114,36 @@ class _DetailScreenState extends State<DetailScreen> {
             //   ),
             // ),
             SizedBox(
-              child: FutureBuilder(
-                  future: recommendMovies,
-                  builder: (ctx, snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(snapshot.error.toString()),
-                      );
-                    } else if (snapshot.hasData) {
-                      return RecommendScreen(snapshot: snapshot);
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  }),
+              child: ListDisplay(
+                  listFuture: recommendMovies,
+                  builder: (snapshot) => RecommendScreen(snapshot: snapshot)),
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: AppButton(
                 text: "Get ticket",
                 onPressed: () {
-                  Modular.to.pushNamed(
-                    '/main/detail/${widget.movieId}/ticket',
-                  );
+                  Modular.to.pushNamed('/main/detail/ticket/${widget.movieId}');
                 },
-                bgcolor: Colors.blue,
+                // onPressed: () async {
+                //   final result = await showDialog(
+                //     context: context,
+                //     builder: (BuildContext context) => const CustomAlertDialog(
+                //       title: "Alert",
+                //       description:
+                //           "this movie not in onshowing still booking ?",
+                //       confirmText: "continue",
+                //       cancelText: "cancel",
+                //     ),
+                //   );
+                //   if (result == true) {
+                //     Modular.to.pushNamed(
+                //       '/main/detail/ticket/${widget.movieId}',
+                //     );
+                //   } else {
+                //     Navigator.of(context).pop;
+                //   }
+                // },
               ),
             ),
           ],

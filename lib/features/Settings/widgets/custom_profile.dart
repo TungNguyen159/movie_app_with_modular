@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/home.dart';
 
 class custom_profile extends StatelessWidget {
   const custom_profile({
@@ -15,7 +16,9 @@ class custom_profile extends StatelessWidget {
         child: Column(
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Modular.to.pushNamed("/main/setting/editProfile");
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: theme.scaffoldBackgroundColor,
@@ -35,14 +38,16 @@ class custom_profile extends StatelessWidget {
                         style:
                             theme.textTheme.bodyMedium!.copyWith(fontSize: 16),
                       ),
-                      const Icon(Icons.arrow_forward_sharp)
+                      const Icon(Icons.arrow_right)
                     ],
                   ),
                 ),
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Modular.to.pushNamed("/main/setting/favorite");
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: theme.scaffoldBackgroundColor,
@@ -60,14 +65,16 @@ class custom_profile extends StatelessWidget {
                       Text('Favourites',
                           style: theme.textTheme.bodyMedium!
                               .copyWith(fontSize: 16)),
-                      const Icon(Icons.arrow_forward_sharp)
+                      const Icon(Icons.arrow_right)
                     ],
                   ),
                 ),
               ),
             ),
             InkWell(
-              onTap: () => {},
+              onTap: () {
+                Modular.to.pushNamed("/main/setting/notification");
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: theme.scaffoldBackgroundColor,
@@ -86,10 +93,10 @@ class custom_profile extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Go Premium',
+                      Text('Notification',
                           style: theme.textTheme.bodyMedium!
                               .copyWith(fontSize: 16)),
-                      const Icon(Icons.arrow_forward_sharp)
+                      const Icon(Icons.arrow_right)
                     ],
                   ),
                 ),

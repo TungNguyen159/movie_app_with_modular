@@ -1,5 +1,4 @@
-class SeatRoute {
-  static const root = "/main/home/detail/";
-  static const rootSearch = "/main/search/detail/";
-  static const rootMovie = "/:movieId/ticket/seat";
+class CheckingRoute {
+  static const root = "/main/detail/ticket";
+  static const rootMovie = "/seat/:movieId";
 }

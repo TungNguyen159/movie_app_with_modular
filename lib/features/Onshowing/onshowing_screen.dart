@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/Widgets/list_display.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/features/Onshowing/widgets/onshowing_list_item.dart';
@@ -29,21 +30,12 @@ class _OnshowingScreenState extends State<OnshowingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextHead(text: "Onshowing"),
+        title: const TextHead(text: "Onshowing"),
       ),
-      body: FutureBuilder(
-          future: onShowingList,
-          builder: (ctx, snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(snapshot.error.toString()),
-              );
-            } else if (snapshot.hasData) {
-              return OnshowingListItem(snapshot: snapshot);
-            } else {
-              return const CircularProgressIndicator();
-            }
-          }),
+      body: ListDisplay(
+        listFuture: onShowingList,
+        builder: (snapshot) => OnshowingListItem(snapshot: snapshot),
+      ),
     );
   }
 }

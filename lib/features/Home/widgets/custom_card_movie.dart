@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
+import 'package:movie_app/core/theme/gap.dart';
+import 'package:movie_app/core/theme/radius.dart';
 
 class CustomCardMovie extends StatelessWidget {
   const CustomCardMovie({
@@ -12,7 +15,7 @@ class CustomCardMovie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: Gap.sM, vertical: Gap.sM),
       height: MediaQuery.of(context).size.height * 0.25,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -28,9 +31,9 @@ class CustomCardMovie extends StatelessWidget {
                   child: Container(
                     height: 210,
                     width: 150,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    margin: const EdgeInsets.symmetric(horizontal: Gap.sm),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: radius20,
                       image: DecorationImage(
                         image: NetworkImage(
                           "${ApiLink.imagePath}${snapshot.data[index].posterPath}",
@@ -39,7 +42,7 @@ class CustomCardMovie extends StatelessWidget {
                       ),
                     ),
                     foregroundDecoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: radius20,
                       gradient: LinearGradient(
                         colors: [
                           Colors.black.withOpacity(0.8),
@@ -54,7 +57,7 @@ class CustomCardMovie extends StatelessWidget {
                 Positioned(
                   left: 15,
                   right: 15,
-                  bottom: 25,
+                  bottom: 15,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -62,28 +65,34 @@ class CustomCardMovie extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              snapshot.data[index].originalTitle,
+                            TextHead(
+                              text: snapshot.data[index].originalTitle,
                               maxLines: 1,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
+                              textStyle: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  ),
                             ),
-                            const SizedBox(width: 5),
+                            Gap.xsWidth,
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  snapshot.data[index].voteAverage.toString(),
-                                  maxLines: 1,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                                const SizedBox(width: 5),
+                                TextHead(
+                                    text: snapshot.data[index].voteAverage
+                                        .toString(),
+                                    maxLines: 1,
+                                    textStyle: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary,
+                                        )),
+                                Gap.xsWidth,
                                 const Icon(
                                   Icons.star,
                                   size: 15,

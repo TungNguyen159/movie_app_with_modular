@@ -65,8 +65,13 @@ class OnshowingListItem extends StatelessWidget {
                             Row(
                               children: [
                                 TextHead(
-                                  text: 'Rated ${data.voteAverage.toString()}',
-                                  fontSize: 16,
+                                  text: data.voteAverage.toString(),
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium!
+                                      .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
                                 const SizedBox(width: 5),
                                 const Icon(

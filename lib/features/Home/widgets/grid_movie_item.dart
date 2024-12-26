@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
+import 'package:movie_app/core/theme/gap.dart';
+import 'package:movie_app/core/theme/radius.dart';
 import 'package:movie_app/models/movie.dart';
 
 class GridMovieItem extends StatelessWidget {
@@ -12,7 +15,7 @@ class GridMovieItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: Gap.xs, vertical: Gap.xs),
       child: InkWell(
         onTap: () {
           Modular.to.pushNamed("/main/detail/${movies.id}");
@@ -22,7 +25,7 @@ class GridMovieItem extends StatelessWidget {
             Container(
               height: double.infinity,
               foregroundDecoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: radius20,
                 gradient: LinearGradient(
                   colors: [
                     Colors.black.withOpacity(0.8),
@@ -33,10 +36,10 @@ class GridMovieItem extends StatelessWidget {
                 ),
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: radius20,
                 image: DecorationImage(
-                  image: NetworkImage(
-                      "${ApiLink.imagePath}${movies.posterPath}"),
+                  image:
+                      NetworkImage("${ApiLink.imagePath}${movies.posterPath}"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -52,28 +55,32 @@ class GridMovieItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                         movies.originalTitle,
+                        TextHead(
+                          text: movies.originalTitle,
                           maxLines: 1,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
+                          textStyle: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                         ),
-                        const SizedBox(width: 5),
+                        Gap.xsWidth,
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                             movies.voteAverage.toString(),
-                              maxLines: 1,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13,
-                              ),
-                            ),
-                            const SizedBox(width: 5),
+                            TextHead(
+                                text: movies.voteAverage.toString(),
+                                maxLines: 1,
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
+                                    )),
+                            Gap.xsWidth,
                             const Icon(
                               Icons.star,
                               size: 15,

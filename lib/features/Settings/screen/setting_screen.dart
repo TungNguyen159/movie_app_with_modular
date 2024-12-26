@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/app_elevated_button.dart';
-import 'package:movie_app/core/theme/theme.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/features/Settings/widgets/custom_profile.dart';
+import 'package:movie_app/home.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -99,7 +99,9 @@ class _SettingScreenState extends State<SettingScreen> {
                           children: [
                             Row(
                               children: [
-                                const Icon(Icons.notifications_none),
+                                const Icon(
+                                  Icons.notifications_none,
+                                ),
                                 const SizedBox(width: 10),
                                 Text('Push Notification',
                                     style: theme.textTheme.bodyMedium!
@@ -109,7 +111,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             Transform.scale(
                               scale: 0.7,
                               child: Switch(
-                                value: isSwitched2,
+                                value: isSwitched,
                                 onChanged: (value) {
                                   setState(() {});
                                 },
@@ -118,12 +120,18 @@ class _SettingScreenState extends State<SettingScreen> {
                           ],
                         ),
                         const SizedBox(height: 10),
-                        const Padding(
+                        Padding(
                           padding: const EdgeInsets.only(right: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                             AppElevatedButton(text: "logout",bgColor: Colors.grey,)
+                              AppButton(
+                                text: "Logout",
+                                
+                                onPressed: () {
+                                  Modular.to.navigate("/authen/");
+                                },
+                              )
                             ],
                           ),
                         ),

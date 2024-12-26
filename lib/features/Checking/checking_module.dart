@@ -1,7 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/features/Checking/checking_screen.dart';
+import 'package:movie_app/features/Checking/checking_route.dart';
+import 'package:movie_app/features/Checking/screen/checking_screen.dart';
 
-class SeatModule extends Module{
+class CheckingModule extends Module{
   @override
   void binds(Injector i) {
     // TODO: implement binds
@@ -9,6 +10,14 @@ class SeatModule extends Module{
   }
   @override
   void routes(RouteManager r) {
-    r.child("", child: (context) => const SeatScreen(movie: {}));
+ r.child(CheckingRoute.rootMovie, child: (context) {
+      final movieId = r.args.params["movieId"];
+      return CheckingScreen(movie: {},movieId: int.parse(movieId));
+    });
+    // r.child(TicketRoute.rootMovie, child: (context) {
+    //   final movieId = r.args.params["movieId"];
+    //   return TicketScreen(movieId: int.parse(movieId));
+    // });
+
   }
 }
