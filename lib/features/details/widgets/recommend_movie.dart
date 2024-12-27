@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/Widgets/text_head.dart';
-import 'package:movie_app/config/api_link.dart';
-import 'package:movie_app/core/image/image_app.dart';
-import 'package:movie_app/core/theme/gap.dart';
+import 'package:movie_app/detail.dart';
+
 
 class RecommendScreen extends StatelessWidget {
   const RecommendScreen({super.key, required this.snapshot});

@@ -11,11 +11,13 @@ class HomeHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'Hi Jack!',
+        Text(
+          'MovieVerse',
           style: TextStyle(
-            fontSize: 24,
-            color: Colors.white,
+            fontSize: 30,
+            color: Theme.of(context).colorScheme.onPrimary,
+            fontFamily: 'Gistesy',
+            fontWeight: FontWeight.bold,
           ),
         ),
         GestureDetector(

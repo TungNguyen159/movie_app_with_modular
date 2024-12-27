@@ -1,5 +1,5 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/config/api_handle.dart';
-import 'package:movie_app/home.dart';
 import 'package:movie_app/models/cast.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/models/movie_detail.dart';

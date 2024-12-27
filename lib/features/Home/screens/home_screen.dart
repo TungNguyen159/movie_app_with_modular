@@ -60,11 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Center(
-                    child: ElevatedButton(
+                    child: AppButton(
                       onPressed: () {
                         Modular.to.navigate("/home/seeAll");
                       },
-                      child: const Text("See all"),
+                      text: "See all",
                     ),
                   ),
                 ],

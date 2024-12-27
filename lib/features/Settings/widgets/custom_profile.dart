@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/home.dart';
 
-class custom_profile extends StatelessWidget {
-  const custom_profile({
+class CustomProfile extends StatelessWidget {
+  const CustomProfile({
     super.key,
-    required this.theme,
   });
-
-  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +18,6 @@ class custom_profile extends StatelessWidget {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: theme.scaffoldBackgroundColor,
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16)),
@@ -33,10 +29,9 @@ class custom_profile extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Edit profile',
-                        style:
-                            theme.textTheme.bodyMedium!.copyWith(fontSize: 16),
+                      TextHead(
+                        text: 'Edit profile',
+                        textStyle: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const Icon(Icons.arrow_right)
                     ],
@@ -49,9 +44,8 @@ class custom_profile extends StatelessWidget {
                 Modular.to.pushNamed("/main/setting/favorite");
               },
               child: Container(
-                decoration: BoxDecoration(
-                  color: theme.scaffoldBackgroundColor,
-                  border: const Border(
+                decoration: const BoxDecoration(
+                  border: Border(
                       right: BorderSide(color: Colors.grey),
                       left: BorderSide(color: Colors.grey),
                       bottom: BorderSide(color: Colors.grey)),
@@ -62,9 +56,10 @@ class custom_profile extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Favourites',
-                          style: theme.textTheme.bodyMedium!
-                              .copyWith(fontSize: 16)),
+                      TextHead(
+                        text: 'Favourites',
+                        textStyle: Theme.of(context).textTheme.bodyMedium,
+                      ),
                       const Icon(Icons.arrow_right)
                     ],
                   ),
@@ -76,12 +71,11 @@ class custom_profile extends StatelessWidget {
                 Modular.to.pushNamed("/main/setting/notification");
               },
               child: Container(
-                decoration: BoxDecoration(
-                  color: theme.scaffoldBackgroundColor,
-                  borderRadius: const BorderRadius.only(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(16),
                       bottomRight: Radius.circular(16)),
-                  border: const Border(
+                  border: Border(
                     bottom: BorderSide(color: Colors.grey),
                     right: BorderSide(color: Colors.grey),
                     left: BorderSide(color: Colors.grey),
@@ -93,9 +87,10 @@ class custom_profile extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Notification',
-                          style: theme.textTheme.bodyMedium!
-                              .copyWith(fontSize: 16)),
+                      TextHead(
+                        text: 'Notification',
+                        textStyle: Theme.of(context).textTheme.bodyMedium,
+                      ),
                       const Icon(Icons.arrow_right)
                     ],
                   ),

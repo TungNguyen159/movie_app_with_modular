@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
-class BackButton extends StatelessWidget implements PreferredSizeWidget{
-  const BackButton({super.key});
+class BackBind extends StatelessWidget {
+  const BackBind({
+    super.key,
+    required this.onPressed,
+  });
 
+  final Function() onPressed;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () {
-            // Modular.to.navigate("/main/home/");
-            Modular.to.pop();
-          },
-        ),
-      ),
+    return IconButton(
+      icon: Icon(Icons.arrow_back_ios,
+          color: Theme.of(context).colorScheme.onPrimary),
+      onPressed: onPressed,
     );
   }
-  
-  @override
-  Size get preferredSize =>  const Size.fromHeight(kToolbarHeight);
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:movie_app/Widgets/app_button.dart';
+import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/features/Settings/widgets/custom_profile.dart';
-import 'package:movie_app/home.dart';
+
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -16,16 +18,14 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-          scrolledUnderElevation: 0,
-          elevation: 0,
-          title: Text(
-            'Profile',
-            style: theme.textTheme.bodyLarge!.copyWith(fontSize: 22),
-          )),
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        title: const TextHead(
+          text: 'Profile',
+        ),
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -41,28 +41,35 @@ class _SettingScreenState extends State<SettingScreen> {
                       radius: 70,
                     ),
                     Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.only(top: 14),
-                        height: 30,
-                        width: 300,
-                        child: Text(
-                          'Victor Nsenji',
-                          style:
-                              theme.textTheme.bodyLarge!.copyWith(fontSize: 17),
-                        )),
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(top: 14),
+                      height: 30,
+                      width: 300,
+                      child: TextHead(
+                        text: 'Victor Nsenji',
+                        textStyle: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(
                   height: 25,
                 ),
-                custom_profile(theme: theme),
+                const CustomProfile(),
                 const SizedBox(height: 29),
                 Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Settings',
-                      style: theme.textTheme.bodyLarge!.copyWith(fontSize: 17),
-                    )),
+                  alignment: Alignment.centerLeft,
+                  child: TextHead(
+                    text: 'Settings',
+                    textStyle: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ),
                 const SizedBox(height: 20),
                 Center(
                   child: SizedBox(
@@ -75,37 +82,11 @@ class _SettingScreenState extends State<SettingScreen> {
                               children: [
                                 const Icon(Icons.palette_outlined),
                                 const SizedBox(width: 10),
-                                Text(
-                                  'Theme',
-                                  style: theme.textTheme.bodyMedium!
-                                      .copyWith(fontSize: 16),
+                                TextHead(
+                                  text: 'Theme',
+                                  textStyle:
+                                      Theme.of(context).textTheme.bodyMedium,
                                 ),
-                              ],
-                            ),
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Switch(
-                                value: isSwitched,
-                                onChanged: (value) {
-                                  setState(() {});
-                                },
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.notifications_none,
-                                ),
-                                const SizedBox(width: 10),
-                                Text('Push Notification',
-                                    style: theme.textTheme.bodyMedium!
-                                        .copyWith(fontSize: 16)),
                               ],
                             ),
                             Transform.scale(
@@ -127,7 +108,6 @@ class _SettingScreenState extends State<SettingScreen> {
                             children: [
                               AppButton(
                                 text: "Logout",
-                                
                                 onPressed: () {
                                   Modular.to.navigate("/authen/");
                                 },

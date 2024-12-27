@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/app_button.dart';
+import 'package:movie_app/Widgets/back_button.dart';
 import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/features/Tickets/widgets/date_selector.dart';
 import 'package:movie_app/features/Tickets/widgets/seat_selector.dart';
@@ -42,8 +43,7 @@ class _TicketScreenState extends State<TicketScreen> {
   AppBar _buildAppBar() {
     return AppBar(
       elevation: 0,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+      leading: BackBind(
         onPressed: () {
           Modular.to.pop();
         },
@@ -72,7 +72,6 @@ class _TicketScreenState extends State<TicketScreen> {
       child: Center(
         child: AppButton(
           text: "Next",
-        
           onPressed: () {
             Modular.to.pushNamed(
               '/main/detail/ticket/seat/${widget.movieId}',

@@ -3,28 +3,31 @@ import 'package:flutter/material.dart';
 const lightColorScheme = ColorScheme(
   brightness: Brightness.light,
   primary: Colors.blue, // Màu  nổi bật
-  onPrimary: Colors.white, // Màu chữ trên primary
-  secondary: Color(0xFFFDD835), // Màu vàng (nhấn mạnh các nút)
-  onSecondary: Colors.black, // Màu chữ trên secondary
-  surface: Color(0xFFFFFFFF), // Màu nền cho Card, Dialog
+  onPrimary: Colors.black, // Màu chữ trên primary
+  secondary: Colors.blue, // Màu nút nhấn
+  onSecondary: Colors.white, // Màu chữ nút nhấn
+  surface: Color(0xFFe6e6e6), // Màu nền cho Card, Dialog
   onSurface: Color(0xFF000000), // Màu chữ trên surface
   error: Color(0xFFD32F2F), // Màu cho thông báo lỗi
   onError: Colors.white, // Màu chữ trên màu error
-  secondaryContainer: Color(0xFF97FB57),
+  secondaryContainer: Color.fromARGB(255, 117, 91, 121),
   onSecondaryContainer: Color.fromARGB(255, 0, 0, 0),
+  tertiary: Color.fromARGB(198, 129, 129, 129), // màu của search box
+  onTertiary: Colors.white, // màu của search box
 );
 
 const darkColorScheme = ColorScheme(
-  primary: Color(0x0000193a),
-  secondary: Color(0xFF4D1F7C),
-  //  background: Color(0xFF241E30),
+  brightness: Brightness.dark,
+  primary: Colors.blue,
+  onPrimary: Colors.white,
+  secondary: Colors.blue,
+  onSecondary: Colors.black,
   surface: Color(0xFF1F1929), // màu nền chính
-  // onBackground: Color(0x0DFFFFFF),
+  onSurface: Colors.white, //màu chữ trên nền chính
   error: Colors.redAccent,
   onError: Colors.white,
-  onPrimary: Colors.white,
-  onSecondary: Colors.white,
-  onSurface: Colors.white,
-  brightness: Brightness.dark,
+  secondaryContainer: Color.fromARGB(255, 117, 91, 121),
   onSecondaryContainer: Colors.white,
+  tertiary: Color.fromARGB(198, 129, 129, 129), // màu của search box
+  onTertiary: Colors.white, // màu của search box
 );

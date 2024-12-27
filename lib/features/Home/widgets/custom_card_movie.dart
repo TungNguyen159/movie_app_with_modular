@@ -72,8 +72,9 @@ class CustomCardMovie extends StatelessWidget {
                                   .textTheme
                                   .titleMedium!
                                   .copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.onPrimary,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onTertiary,
                                   ),
                             ),
                             Gap.xsWidth,
@@ -81,17 +82,18 @@ class CustomCardMovie extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextHead(
-                                    text: snapshot.data[index].voteAverage
-                                        .toString(),
-                                    maxLines: 1,
-                                    textStyle: Theme.of(context)
-                                        .textTheme
-                                        .titleSmall!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onPrimary,
-                                        )),
+                                  text: snapshot.data[index].voteAverage
+                                      .toString(),
+                                  maxLines: 1,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onTertiary,
+                                      ),
+                                ),
                                 Gap.xsWidth,
                                 const Icon(
                                   Icons.star,

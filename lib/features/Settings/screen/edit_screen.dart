@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:movie_app/Widgets/back_button.dart';
 
 import '../../../Widgets/app_button.dart';
-
-
 
 class EditScreen extends StatefulWidget {
   const EditScreen({super.key});
@@ -69,10 +68,9 @@ class _EditScreenState extends State<EditScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Profile'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+        leading: BackBind(
           onPressed: () {
-           //  Modular.to.navigate("/main/setting");
+            //  Modular.to.navigate("/main/setting");
             Modular.to.pop();
           },
         ),
@@ -133,8 +131,7 @@ class _EditScreenState extends State<EditScreen> {
                 decoration: InputDecoration(
                   errorText: _nameValidate ? null : 'Enter Valid Name',
                   border: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.blue, width: 1.0)),
+                      borderSide: BorderSide(color: Colors.blue, width: 1.0)),
                 ),
                 onSubmitted: (value) {
                   setState(() {
@@ -168,8 +165,7 @@ class _EditScreenState extends State<EditScreen> {
                 decoration: InputDecoration(
                   errorText: _emailValidate ? null : 'Enter Valid Email',
                   border: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.blue, width: 1.0)),
+                      borderSide: BorderSide(color: Colors.blue, width: 1.0)),
                 ),
                 onSubmitted: (value) {
                   setState(() {
@@ -191,7 +187,6 @@ class _EditScreenState extends State<EditScreen> {
                     Modular.to.pop();
                   },
                   text: "Save changes",
-                
                 ),
               )
             ],

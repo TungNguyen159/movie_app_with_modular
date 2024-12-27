@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/text_head.dart';
-import 'package:movie_app/config/api_link.dart';
-import 'package:movie_app/core/image/image_app.dart';
+import 'package:movie_app/detail.dart';
 
 class CastAndCrew extends StatelessWidget {
   const CastAndCrew({
@@ -45,10 +43,18 @@ class CastAndCrew extends StatelessWidget {
                                   : AssetImage(ImageApp.defaultImage),
                             ),
                             const SizedBox(height: 10),
-                            Text(cast[index].originalName ?? "Unknown",
-                                maxLines: 2,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.titleMedium!)
+                            Text(
+                              cast[index].originalName ?? "Unknown",
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  ),
+                            ),
                           ],
                         ),
                       );
@@ -56,13 +62,8 @@ class CastAndCrew extends StatelessWidget {
                   ),
                 )
               : const Center(
-                  child: Text(
-                    "No cast available",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: TextHead(
+                    text: "No cast available",
                   ),
                 ),
         ],

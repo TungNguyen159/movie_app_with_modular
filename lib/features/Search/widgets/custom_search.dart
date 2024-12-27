@@ -3,6 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
 import 'package:movie_app/core/image/image_app.dart';
+import 'package:movie_app/core/theme/gap.dart';
+import 'package:movie_app/core/theme/radius.dart';
 
 class CustomSearch extends StatelessWidget {
   const CustomSearch({super.key, required this.snapshot});
@@ -11,14 +13,17 @@ class CustomSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: const EdgeInsets.symmetric(
+          horizontal: Gap.sM,
+          vertical: Gap.sM,
+        ),
         width: double.infinity,
         child: ListView.builder(
-          itemCount: 10,
+          itemCount: snapshot.data.length,
           itemBuilder: (ctx, index) {
             final data = snapshot.data[index];
             return Padding(
-              padding: const EdgeInsets.only(top: 8),
+              padding: const EdgeInsets.only(top: Gap.sm),
               child: SizedBox(
                 width: double.infinity,
                 child: InkWell(
@@ -28,7 +33,7 @@ class CustomSearch extends StatelessWidget {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 8),
+                        padding: const EdgeInsets.only(right: Gap.sm),
                         child: Column(
                           children: [
                             Image.network(
@@ -51,26 +56,26 @@ class CustomSearch extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              data.originalTitle,
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.white),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            ),
-                            const SizedBox(height: 5),
+                            TextHead(
+                                text: data.originalTitle,
+                                maxLines: 2,
+                                textStyle:
+                                    Theme.of(context).textTheme.titleMedium!
+                                //overflow: TextOverflow.ellipsis,
+                                ),
+                            Gap.xsHeight,
                             Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimary,
                                     width: 1.0,
                                     style: BorderStyle.solid),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ), //
+                                borderRadius: radius8,
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(Gap.sm),
                                 child: TextHead(
                                   text: 'Release Date ${data.releaseDate}',
                                   textStyle: Theme.of(context)
@@ -94,17 +99,15 @@ class CustomSearch extends StatelessWidget {
                             color: Colors.yellow,
                             style: BorderStyle.solid,
                           ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50),
-                          ),
+                          borderRadius: radius50,
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0).copyWith(top: 20),
+                          padding: const EdgeInsets.all(Gap.sm).copyWith(top: Gap.mL),
                           child: Text(
                             snapshot.data[index].voteAverage.toString(),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 13,
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.onPrimary,
                               fontWeight: FontWeight.bold,
                             ),
                             textAlign: TextAlign.center,

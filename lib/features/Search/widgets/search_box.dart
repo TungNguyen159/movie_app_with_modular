@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/theme/gap.dart';
+import 'package:movie_app/core/theme/radius.dart';
 
 class SearchBox extends StatelessWidget {
   const SearchBox({
@@ -14,23 +16,27 @@ class SearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 8.0, right: 16.0),
+      padding: const EdgeInsets.only(left: Gap.sm, right: Gap.md),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(79, 249, 249, 249),
-        borderRadius: BorderRadius.circular(20),
+        color: Theme.of(context).colorScheme.tertiary,
+        //color: const Color.fromARGB(79, 249, 249, 249),
+        borderRadius: radius20,
       ),
       child: TextField(
         controller: controller,
         onChanged: onChanged,
         focusNode: focusNode,
-        style: const TextStyle(color: Colors.white),
-        decoration: const InputDecoration(
+        style: TextStyle(color: Theme.of(context).colorScheme.onTertiary),
+        decoration: InputDecoration(
           border: InputBorder.none,
-          prefixIcon: Icon(Icons.search, color: Colors.white),
-          prefixIconConstraints: BoxConstraints(minWidth: 28.0),
+          prefixIcon: Icon(
+            Icons.search,
+            color: Theme.of(context).colorScheme.onTertiary,
+          ),
+          prefixIconConstraints: const BoxConstraints(minWidth: Gap.lX),
           hintText: 'Search',
           hintStyle: TextStyle(
-            color: Color.fromARGB(79, 249, 249, 249),
+            color: Theme.of(context).colorScheme.onTertiary,
           ),
         ),
       ),

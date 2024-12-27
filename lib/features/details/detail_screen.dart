@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/config/api_handle.dart';
-import 'package:movie_app/features/details/widgets/cast_and_crew.dart';
-import 'package:movie_app/features/details/widgets/custom_detail.dart';
-import 'package:movie_app/features/details/widgets/recommend_movie.dart';
-import 'package:movie_app/features/details/widgets/videos_list.dart';
-import 'package:movie_app/home.dart';
-import 'package:movie_app/models/cast.dart';
-import 'package:movie_app/models/movie.dart';
-import 'package:movie_app/models/movie_detail.dart';
+import 'package:movie_app/Widgets/back_button.dart';
+import 'package:movie_app/detail.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.movieId});
@@ -36,11 +29,8 @@ class _DetailScreenState extends State<DetailScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios,
-              color: Theme.of(context).colorScheme.primary),
+        leading: BackBind(
           onPressed: () {
-            // Modular.to.navigate("/main/home/");
             Modular.to.pop();
           },
         ),
@@ -72,45 +62,16 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             SizedBox(
-              child: FutureBuilder<Credits>(
-                future: movieCasts, // Your Future to fetch the movie casts
-                builder: (ctx, snapshot) {
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text(
-                        snapshot.error.toString(),
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: Theme.of(context).colorScheme.error,
-                            ),
-                      ),
-                    );
-                  } else if (snapshot.hasData) {
-                    final cast = snapshot.data!.cast;
-
-                    return CastAndCrew(cast: cast);
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
+              child: ListDisplay<Cast>(
+                  listFuture: movieCasts.then((credits) => credits.cast),
+                  builder: (snapshot) {
+                    return CastAndCrew(cast: snapshot.data!);
+                  }),
             ),
             // SizedBox(
-            //   child: FutureBuilder<dynamic>(
-            //     future: movieVideos, // Your Future to fetch the movie casts
-            //     builder: (ctx, snapshot) {
-            //       if (snapshot.hasError) {
-            //         return Center(
-            //           child: Text(
-            //             snapshot.error.toString(),
-            //             style: const TextStyle(color: Colors.red),
-            //           ),
-            //         );
-            //       } else if (snapshot.hasData) {
-            //         return VideosList(snapshot: snapshot);
-            //       } else {
-            //         return const Center(child: CircularProgressIndicator());
-            //       }
-            //     },
+            //   child: ListDisplay(
+            //     listFuture: movieVideos,
+            //     builder: (snapshot) => VideosList(snapshot: snapshot),
             //   ),
             // ),
             SizedBox(
@@ -119,7 +80,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   builder: (snapshot) => RecommendScreen(snapshot: snapshot)),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(Gap.mL),
               child: AppButton(
                 text: "Get ticket",
                 onPressed: () {

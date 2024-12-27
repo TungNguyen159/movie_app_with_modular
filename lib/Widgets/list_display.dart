@@ -15,7 +15,9 @@ class ListDisplay<T> extends StatelessWidget {
       future: listFuture,
       builder: (ctx, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         } else if (snapshot.hasError) {
           return Center(
               child: Text(
@@ -25,7 +27,13 @@ class ListDisplay<T> extends StatelessWidget {
         } else if (snapshot.hasData) {
           return builder(snapshot);
         } else {
-          return const Center(child: Text("No data available"));
+          return Center(
+              child: Text(
+            "No data available",
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSecondary,
+            ),
+          ));
         }
       },
     );

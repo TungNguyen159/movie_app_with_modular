@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_link.dart';
 import 'package:movie_app/core/image/image_app.dart';
+import 'package:movie_app/core/theme/gap.dart';
 
 class OnshowingListItem extends StatelessWidget {
   const OnshowingListItem({
@@ -14,14 +15,15 @@ class OnshowingListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin:
+            const EdgeInsets.symmetric(horizontal: Gap.sM, vertical: Gap.sM),
         width: double.infinity,
         child: ListView.builder(
-          itemCount: 8,
+          itemCount: 10,
           itemBuilder: (ctx, index) {
             final data = snapshot.data[index];
             return Padding(
-              padding: const EdgeInsets.only(top: 8),
+              padding: const EdgeInsets.only(top: Gap.sm),
               child: SizedBox(
                 width: double.infinity,
                 child: InkWell(
@@ -31,7 +33,7 @@ class OnshowingListItem extends StatelessWidget {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 8),
+                        padding: const EdgeInsets.only(right: Gap.sm),
                         child: Column(
                           children: [
                             Image.network(
@@ -54,14 +56,14 @@ class OnshowingListItem extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              data.originalTitle,
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.white),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            ),
-                            const SizedBox(height: 5),
+                            TextHead(
+                                text: data.originalTitle,
+                                maxLines: 2,
+                                textStyle:
+                                    Theme.of(context).textTheme.titleMedium!
+                                //overflow: TextOverflow.ellipsis,
+                                ),
+                            Gap.xsHeight,
                             Row(
                               children: [
                                 TextHead(
@@ -73,7 +75,7 @@ class OnshowingListItem extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
-                                const SizedBox(width: 5),
+                                Gap.xsWidth,
                                 const Icon(
                                   Icons.star,
                                   color: Colors.yellow,
@@ -84,7 +86,8 @@ class OnshowingListItem extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0).copyWith(top: 20),
+                        padding:
+                            const EdgeInsets.all(Gap.sm).copyWith(top: Gap.mL),
                         child: const Icon(Icons.favorite),
                       ),
                     ],

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/app_button.dart';
+import 'package:movie_app/Widgets/back_button.dart';
 import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/config/api_link.dart';
 import 'package:movie_app/core/image/image_app.dart';
+import 'package:movie_app/core/theme/gap.dart';
+
 import 'package:movie_app/features/Checking/screen/payment_screen.dart';
 import 'package:movie_app/features/Checking/widgets/ticket_item.dart';
 import 'package:movie_app/models/movie_detail.dart';
@@ -33,7 +37,9 @@ class _CheckingScreenState extends State<CheckingScreen> {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
+        leading: BackBind(onPressed: (){
+          Modular.to.pop();
+        }),
         scrolledUnderElevation: 0,
         automaticallyImplyLeading: true,
         title: FutureBuilder<MovieDetail>(
@@ -55,7 +61,7 @@ class _CheckingScreenState extends State<CheckingScreen> {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: Gap.mL),
               child: Column(
                 children: [
                   Column(
@@ -84,6 +90,10 @@ class _CheckingScreenState extends State<CheckingScreen> {
                                         : AssetImage(ImageApp.defaultImage),
                                     fit: BoxFit.cover,
                                   ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(Gap.sM),
+                                    topRight: Radius.circular(Gap.sM)
+                                  )
                                 ),
                               );
                             }
@@ -97,7 +107,6 @@ class _CheckingScreenState extends State<CheckingScreen> {
                       ),
                       Container(
                         color: const Color.fromARGB(255, 252, 205, 212),
-                        padding: const EdgeInsets.only(top: 0),
                         child: Row(
                           children: [
                             SizedBox(
@@ -113,7 +122,7 @@ class _CheckingScreenState extends State<CheckingScreen> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(Gap.sM),
                                 child: LayoutBuilder(
                                   builder: (BuildContext context,
                                       BoxConstraints constraints) {
@@ -169,13 +178,12 @@ class _CheckingScreenState extends State<CheckingScreen> {
           ),
           // Nút "Pay" nằm ở cuối màn hình, không bị cuộn
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: Gap.mL, vertical: Gap.sM),
             child: AppButton(
               text: "Confirm",
-             
               onPressed: () {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (ctx) => PaymentScreen()));
+                    .push(MaterialPageRoute(builder: (ctx) => const PaymentScreen()));
               },
             ),
           ),

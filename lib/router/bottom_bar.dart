@@ -1,6 +1,6 @@
 import 'dart:ui'; // Needed for BackdropFilter
 import 'package:flutter/material.dart';
-import 'package:movie_app/features/Yourbooking/Booked_screen.dart';
+import 'package:movie_app/features/Yourbooking/booked_screen.dart';
 import 'package:movie_app/features/Home/screens/home_screen.dart';
 import 'package:movie_app/features/Onshowing/onshowing_screen.dart';
 import 'package:movie_app/features/Search/search_screen.dart';
@@ -39,10 +39,11 @@ class _BottomBarState extends State<BottomBar> {
               });
             },
             currentIndex: _currentIndex,
-            backgroundColor:
-                Colors.black, // Semi-transparent background
-            selectedItemColor: Colors.white, // Selected item color
-            unselectedItemColor: Colors.grey, // Unselected item color
+            backgroundColor: Theme.of(context)
+                .colorScheme
+                .surface, // Semi-transparent background
+            selectedItemColor: Theme.of(context).colorScheme.primary, // Selected item color
+            unselectedItemColor: Theme.of(context).colorScheme.tertiary, // Unselected item color
             type: BottomNavigationBarType.fixed, // Keep labels visible
             showUnselectedLabels: false,
             items: const <BottomNavigationBarItem>[

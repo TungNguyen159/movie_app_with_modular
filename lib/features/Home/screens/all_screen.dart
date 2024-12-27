@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/Widgets/text_head.dart';
-import 'package:movie_app/config/api_handle.dart';
-import 'package:movie_app/features/Home/widgets/grid_movie_item.dart';
-import 'package:movie_app/models/movie.dart';
-
+import 'package:movie_app/Widgets/back_button.dart';
+import 'package:movie_app/home.dart';
 class PopularScreen extends StatefulWidget {
   const PopularScreen({super.key});
 
   @override
   State<PopularScreen> createState() => _PopularScreenState();
 }
-
 class _PopularScreenState extends State<PopularScreen> {
   List<Movies> getMovie = []; // Danh sách phim
   final controllerApis = ControllerApi();
@@ -23,7 +18,6 @@ class _PopularScreenState extends State<PopularScreen> {
     super.initState();
     loadData(); // Tải dữ liệu ban đầu
   }
-
   // Hàm tải dữ liệu
   Future<void> loadData() async {
     if (isLoading) return; // Ngăn chặn tải nhiều lần
@@ -46,11 +40,7 @@ class _PopularScreenState extends State<PopularScreen> {
         title: const TextHead(
           text: "All movies",
         ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Theme.of(context).colorScheme.onSecondary,
-          ),
+        leading: BackBind(
           onPressed: () {
             Modular.to.navigate("/main");
             //Modular.to.pop();

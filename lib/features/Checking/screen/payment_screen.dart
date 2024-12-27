@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movie_app/Widgets/app_button.dart';
+import 'package:movie_app/Widgets/back_button.dart';
 import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/features/Checking/screen/Confirmation_screen.dart';
 import 'package:movie_app/features/Checking/widgets/billing_details.dart';
@@ -12,18 +13,19 @@ class PaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const TextHead(text: "Payment Options"),
+        leading: BackBind(
+          onPressed: () {
+            Modular.to.pop();
+          },
+        ),
+      ),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
             children: [
-              const SizedBox(height: 20),
-
-              // Back icon and title
-              const _BackIconRow(),
-
-              const SizedBox(height: 20),
-
               // Billing Details
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -31,7 +33,7 @@ class PaymentScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20)),
-                  child: BillingDetails(),
+                  child: const BillingDetails(),
                 ),
               ),
 
@@ -53,13 +55,12 @@ class PaymentScreen extends StatelessWidget {
 
               // Pay Button
               Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: AppButton(
                   text: 'Pay',
-                 
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) => ConfirmationScreen()));
+                        builder: (ctx) => const ConfirmationScreen()));
                   },
                 ),
               ),
@@ -71,21 +72,3 @@ class PaymentScreen extends StatelessWidget {
   }
 }
 
-class _BackIconRow extends StatelessWidget {
-  const _BackIconRow();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        IconButton(
-          icon: const Icon(Icons.arrow_back_sharp, size: 26),
-          onPressed: () => Modular.to.pop(),
-        ),
-        const Spacer(),
-        const TextHead(text: 'Payment Options'),
-        const Spacer(flex: 3),
-      ],
-    );
-  }
-}

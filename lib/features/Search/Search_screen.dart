@@ -1,9 +1,10 @@
 import 'dart:async'; // Để sử dụng debounce
 import 'package:flutter/material.dart';
+import 'package:movie_app/Widgets/list_display.dart';
+import 'package:movie_app/Widgets/text_head.dart';
 import 'package:movie_app/config/api_handle.dart';
 import 'package:movie_app/features/Search/widgets/custom_search.dart';
 import 'package:movie_app/features/Search/widgets/search_box.dart';
-import 'package:movie_app/home.dart';
 import 'package:movie_app/models/movie.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -50,10 +51,12 @@ class _SearchScreenState extends State<SearchScreen> {
                 listFuture: searchInfo,
                 builder: (snapshot) {
                   if (snapshot.data!.isEmpty) {
-                    return const Center(
-                      child: Text(
-                        "Không có dữ liệu",
-                        style: TextStyle(color: Colors.white),
+                    return Center(
+                      child: TextHead(
+                        text: "Không có dữ liệu",
+                        textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.bold
+                        ),
                       ),
                     );
                   }

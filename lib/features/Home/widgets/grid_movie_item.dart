@@ -62,7 +62,7 @@ class GridMovieItem extends StatelessWidget {
                               .textTheme
                               .titleMedium!
                               .copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                                color: Theme.of(context).colorScheme.onTertiary,
                               ),
                         ),
                         Gap.xsWidth,
@@ -78,7 +78,7 @@ class GridMovieItem extends StatelessWidget {
                                     .copyWith(
                                       color: Theme.of(context)
                                           .colorScheme
-                                          .onPrimary,
+                                          .onTertiary,
                                     )),
                             Gap.xsWidth,
                             const Icon(

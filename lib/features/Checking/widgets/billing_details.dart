@@ -5,12 +5,12 @@ class BillingDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
+    return const Padding(
+      padding: EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Billing Details',
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -18,10 +18,10 @@ class BillingDetails extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: 15),
+          SizedBox(height: 15),
           _BillingSummary(),
-          const Divider(color: Colors.black, thickness: 0.8),
-          const Align(
+          Divider(color: Colors.black, thickness: 0.8),
+          Align(
             alignment: Alignment.centerRight,
             child: Text(
               'Total - Rs.1000',

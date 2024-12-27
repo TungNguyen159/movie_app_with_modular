@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/text_head.dart';
-import 'package:movie_app/config/api_link.dart';
-import 'package:movie_app/core/image/image_app.dart';
-import 'package:movie_app/core/theme/gap.dart';
-import 'package:movie_app/core/theme/radius.dart';
+import 'package:movie_app/detail.dart';
 
 class CustomDetail extends StatelessWidget {
   const CustomDetail({super.key, required this.snapshot});
@@ -16,16 +12,6 @@ class CustomDetail extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                // foregroundDecoration: BoxDecoration(
-                //   gradient: LinearGradient(
-                //     colors: [
-                //       Colors.black.withOpacity(0.8),
-                //       Colors.transparent,
-                //     ],
-                //     begin: Alignment.bottomCenter,
-                //     end: Alignment.topCenter,
-                //   ),
-                // ),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.7,
                 decoration: BoxDecoration(
@@ -55,12 +41,6 @@ class CustomDetail extends StatelessWidget {
                               TextHead(
                                 text: '${snapshot.data.originalTitle}',
                                 maxLines: 2,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
                               ),
                               Gap.xsHeight,
                               Container(
@@ -68,7 +48,7 @@ class CustomDetail extends StatelessWidget {
                                   border: Border.all(
                                       color: Theme.of(context)
                                           .colorScheme
-                                          .onSecondary,
+                                          .onPrimary,
                                       width: 1.0,
                                       style: BorderStyle.solid),
                                   borderRadius: radius8,
@@ -125,7 +105,9 @@ class CustomDetail extends StatelessWidget {
                       children: [
                         Text(
                           '${snapshot.data.overview}',
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary
+                          ),
                         ),
                       ],
                     )
