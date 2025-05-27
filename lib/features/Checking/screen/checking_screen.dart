@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/Widgets/app_button.dart';
-import 'package:movie_app/Widgets/back_button.dart';
-import 'package:movie_app/config/api_handle.dart';
-import 'package:movie_app/config/api_link.dart';
-import 'package:movie_app/core/image/image_app.dart';
-import 'package:movie_app/core/theme/gap.dart';
-
-import 'package:movie_app/features/Checking/screen/payment_screen.dart';
-import 'package:movie_app/features/Checking/widgets/ticket_item.dart';
-import 'package:movie_app/models/movie_detail.dart';
+import 'package:movie_app2/Components/app_button.dart';
+import 'package:movie_app2/Components/back_button.dart';
+import 'package:movie_app2/Components/text_head.dart';
+import 'package:movie_app2/core/theme/gap.dart';
+import 'package:movie_app2/features/Checking/widgets/ticket_item.dart';
+import 'package:movie_app2/models/movies.dart';
+import 'package:movie_app2/models/seat.dart';
+import 'package:movie_app2/service/hall_service.dart';
+import 'package:movie_app2/service/movie_service.dart';
+import 'package:movie_app2/service/seat_service.dart';
 
 class CheckingScreen extends StatefulWidget {
-  final Map movie;
-  final int movieId;
+  final String movieId;
   const CheckingScreen({
     super.key,
-    required this.movie,
     required this.movieId,
   });
 
@@ -25,11 +23,18 @@ class CheckingScreen extends StatefulWidget {
 }
 
 class _CheckingScreenState extends State<CheckingScreen> {
-  late final Future<MovieDetail> movieDetails;
+  late final Future<Movies> movieDetails;
+  late List<Seat> selectedSeat;
+  late String selectedShowtimeId;
+  final seatService = SeatService();
+  final movieService = MovieService();
+  final hallService = HallService();
   @override
   void initState() {
     super.initState();
-    movieDetails = ControllerApi().fetchMovieDetail(widget.movieId);
+    movieDetails = movieService.getmovieid(widget.movieId);
+    selectedSeat = Modular.args.data['selectedSeat'] ?? "";
+    selectedShowtimeId = Modular.args.data['selectedShowtimeId'] ?? "";
   }
 
   @override
@@ -37,25 +42,12 @@ class _CheckingScreenState extends State<CheckingScreen> {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        leading: BackBind(onPressed: (){
+        leading: BackBind(onPressed: () {
           Modular.to.pop();
         }),
         scrolledUnderElevation: 0,
         automaticallyImplyLeading: true,
-        title: FutureBuilder<MovieDetail>(
-          future: movieDetails,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Text("Loading..."); // Hiển thị khi đang tải
-            } else if (snapshot.hasError) {
-              return const Text("Error loading title"); // Lỗi
-            } else {
-              return Text(snapshot.data!.originalTitle, // In ra title
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold));
-            }
-          },
-        ),
+        title: const TextHead(text: "Checking"),
       ),
       body: Column(
         children: [
@@ -69,7 +61,7 @@ class _CheckingScreenState extends State<CheckingScreen> {
                       SizedBox(
                         width: double.maxFinite,
                         height: 500,
-                        child: FutureBuilder<MovieDetail>(
+                        child: FutureBuilder<Movies>(
                           future: movieDetails,
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
@@ -80,28 +72,23 @@ class _CheckingScreenState extends State<CheckingScreen> {
                               return const Center(
                                   child: Text("Error loading image"));
                             } else {
-                              String imageUrl = snapshot.data?.posterPath ?? '';
+                              String imageUrl = snapshot.data?.posterurl ?? '';
                               return Container(
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: imageUrl.isNotEmpty
-                                        ? NetworkImage(
-                                            '${ApiLink.imagePath}$imageUrl')
-                                        : AssetImage(ImageApp.defaultImage),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(Gap.sM),
-                                    topRight: Radius.circular(Gap.sM)
-                                  )
-                                ),
+                                    image: DecorationImage(
+                                      image: NetworkImage(imageUrl),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(Gap.sM),
+                                        topRight: Radius.circular(Gap.sM))),
                               );
                             }
                           },
                         ),
                       ),
                       Container(
-                        height: 20,
+                        height: 50,
                         width: double.maxFinite,
                         color: const Color.fromARGB(255, 252, 205, 212),
                       ),
@@ -166,24 +153,45 @@ class _CheckingScreenState extends State<CheckingScreen> {
                       ),
                     ],
                   ),
-                  ...List.generate(6, (index) {
-                    return const TicketItem(
-                      seatNumber: '1112', // Example seat number
-                      price: 'Ugx 10000', // Example price
-                    );
-                  }),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: selectedSeat.length,
+                    itemBuilder: (ctx, index) {
+                      Seat seat = selectedSeat[index]; // Lấy ghế hiện tại
+                      return TicketItem(
+                        seatNumber: seat.seatnumber!, // Hiển thị số ghế
+                        price: seat.price!,
+                        type: seat.type, // Hiển thị loại ghế (normal/vip)
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
           ),
           // Nút "Pay" nằm ở cuối màn hình, không bị cuộn
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: Gap.mL, vertical: Gap.sM),
+            padding: const EdgeInsets.symmetric(
+                horizontal: Gap.mL, vertical: Gap.sM),
             child: AppButton(
               text: "Confirm",
-              onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (ctx) => const PaymentScreen()));
+              onPressed: () async {
+                try {
+                  // Nếu lưu thành công, chuyển hướng sang trang xác nhận
+                  Modular.to.pushNamed(
+                    "/main/detail/ticket/payment",
+                    arguments: {
+                      "selectedSeat": selectedSeat,
+                      "selectedShowtimeId": selectedShowtimeId,
+                    },
+                  );
+                } catch (e) {
+                  // Hiển thị lỗi nếu có
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Lỗi khi lưu ghế: $e")),
+                  );
+                }
               },
             ),
           ),

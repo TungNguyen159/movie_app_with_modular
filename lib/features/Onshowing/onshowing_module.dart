@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/features/Onshowing/onshowing_screen.dart';
-import 'package:movie_app/router/main_route.dart';
+import 'package:movie_app2/features/Onshowing/onshowing_screen.dart';
+import 'package:movie_app2/router/main_route.dart';
 
 class OnshowingModule extends Module {
   @override

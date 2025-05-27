@@ -6,12 +6,12 @@ const lightColorScheme = ColorScheme(
   onPrimary: Colors.black, // Màu chữ trên primary
   secondary: Colors.blue, // Màu nút nhấn
   onSecondary: Colors.white, // Màu chữ nút nhấn
-  surface: Color(0xFFe6e6e6), // Màu nền cho Card, Dialog
+  surface: Color(0xFFe6e6e6), // Màu chinh
   onSurface: Color(0xFF000000), // Màu chữ trên surface
   error: Color(0xFFD32F2F), // Màu cho thông báo lỗi
   onError: Colors.white, // Màu chữ trên màu error
-  secondaryContainer: Color.fromARGB(255, 117, 91, 121),
-  onSecondaryContainer: Color.fromARGB(255, 0, 0, 0),
+  // secondaryContainer: Color.fromARGB(255, 117, 91, 121),
+  // onSecondaryContainer: Color.fromARGB(255, 0, 0, 0),
   tertiary: Color.fromARGB(198, 129, 129, 129), // màu của search box
   onTertiary: Colors.white, // màu của search box
 );

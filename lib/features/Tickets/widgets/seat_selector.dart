@@ -1,129 +1,176 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/text_head.dart';
+import 'package:movie_app2/models/seat.dart';
+import 'package:movie_app2/service/hall_service.dart';
+import 'package:movie_app2/service/seat_service.dart';
+import 'package:movie_app2/service/showtime_service.dart';
 
-class SeatSelectionWidget extends StatelessWidget {
-  final int rows;
-  final int columns;
-  final List<Seat> selectedSeats; // Danh sách các ghế đã chọn
-
-  const SeatSelectionWidget({
+class SeatBookingScreen extends StatefulWidget {
+  final Function(List<Seat>, int) onSeatSelected;
+  final String showtimeId;
+  final String hallid;
+  const  SeatBookingScreen({
     super.key,
-    required this.rows,
-    required this.columns,
-    required this.selectedSeats,
+    required this.onSeatSelected,
+    required this.showtimeId,
+    required this.hallid,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: columns, // Số cột
-        childAspectRatio: 1, // Tỉ lệ ô vuông
-      ),
-      itemCount: rows * columns, // Tổng số ghế
-      itemBuilder: (context, index) {
-        final seatNumber = index + 1;
-        final isSelected = selectedSeats.any((seat) => seat.id == seatNumber);
-
-        return SeatWidget(
-          seatNumber: seatNumber,
-          isSelected: isSelected,
-        );
-      },
-    );
-  }
+  State<SeatBookingScreen> createState() => _SeatBookingScreenState();
 }
 
-// Widget đại diện cho 1 ghế
-class SeatWidget extends StatelessWidget {
-  final int seatNumber;
-  final bool isSelected;
+class _SeatBookingScreenState extends State<SeatBookingScreen> {
+  final hallService = HallService();
+  final showtimeService = ShowtimeService();
+  final seatService = SeatService();
+  List<Seat> seats = [];
+  List<Seat> selectedSeats = [];
+  int totalPrice = 0;
+  int? columns;
+  @override
+  void initState() {
+    super.initState();
+    _fetchSeats();
+  }
 
-  const SeatWidget({
-    super.key,
-    required this.seatNumber,
-    this.isSelected = false,
-  });
+  // tạo danh sách ghế
+  Future<void> _fetchSeats() async {
+    final hallresponse = await hallService.fetchHallById(widget.hallid);
+    final showtimeresponse =
+        await showtimeService.fetchbyshowtimeid(widget.showtimeId);
+    int rows = hallresponse.row;
+    columns = hallresponse.column;
+    int basePrices = showtimeresponse.price;
+    List<Seat> fixedSeats = [];
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < columns!; col++) {
+        String seatNumber = '${String.fromCharCode(65 + row)}${col + 1}';
+        bool isNormal = row < (rows * 0.6);
+        String type = isNormal ? 'normal' : 'vip';
+        int price = isNormal ? basePrices : (basePrices * 1.5).toInt();
+
+        fixedSeats.add(Seat(
+          seatnumber: seatNumber,
+          status: 'available',
+          type: type,
+          price: price,
+        ));
+      }
+    }
+    setState(() {
+      seats = fixedSeats;
+    });
+  }
+
+  void toggleSeat(Seat seat) {
+    setState(() {
+      if (seat.status == 'available') {
+        if (selectedSeats.contains(seat)) {
+          selectedSeats.remove(seat);
+          seat.status = 'available';
+          totalPrice -= seat.price!;
+        } else {
+          selectedSeats.add(seat);
+          seat.status = 'booked';
+          totalPrice += seat.price!;
+        }
+      } else if (seat.status == 'booked') {
+        seat.status = 'available';
+        selectedSeats.remove(seat);
+        totalPrice -= seat.price!;
+      }
+
+      widget.onSeatSelected(selectedSeats, totalPrice);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        color:
-            isSelected ? Colors.red : Colors.grey[300], // Đổi màu khi đã chọn
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.black, width: 0.5),
-      ),
-      child: Center(
-        child: Text(
-          seatNumber.toString(),
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// Model cho ghế ngồi
-class Seat {
-  final int id; // Mã ghế
-  Seat({required this.id});
-}
-
-
-class SeatSelector extends StatelessWidget {
-  const SeatSelector({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final List<Seat> selectedSeats = [
-      Seat(id: 3),
-      Seat(id: 7),
-      Seat(id: 12),
-      Seat(id: 15),
-    ];
-
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
         children: [
-          // Phần tiêu đề cố định
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextHead(text: 
-              "Seat Selection",
-             
-            ),
+          const Text(
+            "Sơ đồ ghế",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10),
-
-          // Phần cuộn
+          Image.asset("assets/screen.png"),
+          const SizedBox(height: 8),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset("screen.png"),
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SeatSelectionWidget(
-                      rows: 8, // Số hàng
-                      columns: 7, // Số cột
-                      selectedSeats: selectedSeats, // Danh sách ghế đã chọn
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: columns != null
+                    ? StreamBuilder<List<Seat>>(
+                        stream:
+                            seatService.getseatbyshowtime(widget.showtimeId),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          final bookedSeats = snapshot.data!;
+                          final updatedSeats = seats;
+                          for (var bookedSeat in bookedSeats) {
+                            String seatNumber = bookedSeat.seatnumber!;
+                            int seatIndex = updatedSeats.indexWhere(
+                                (seat) => seat.seatnumber == seatNumber);
+                            if (seatIndex != -1) {
+                              updatedSeats[seatIndex].status =
+                                  'unavailable'; // Ghế đã được đặt trước
+                            }
+                          }
+                          return GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount:
+                                  columns!, // an toàn vì đã kiểm tra ở trên
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 8,
+                            ),
+                            itemCount: updatedSeats.length,
+                            itemBuilder: (context, index) {
+                              final seat = updatedSeats[index];
+                              return _buildSeatWidget(seat);
+                            },
+                          );
+                        })
+                    : const Center(child: CircularProgressIndicator())),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            "Tổng tiền: $totalPrice vnđ",
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSeatWidget(Seat seat) {
+    Color seatColor;
+    if (seat.status == 'unavailable') {
+      seatColor = Colors.grey;
+    } else if (selectedSeats.contains(seat)) {
+      seatColor = Colors.red;
+    } else {
+      seatColor = seat.type == 'vip' ? Colors.amber : Colors.green;
+    }
+
+    return GestureDetector(
+      onTap: seat.status != 'unavailable' ? () => toggleSeat(seat) : null,
+      child: Container(
+        width: 40,
+        height: 40,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: seatColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          seat.seatnumber!,
+          style:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

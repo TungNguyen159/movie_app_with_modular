@@ -1,10 +1,10 @@
 import 'dart:ui'; // Needed for BackdropFilter
 import 'package:flutter/material.dart';
-import 'package:movie_app/features/Yourbooking/booked_screen.dart';
-import 'package:movie_app/features/Home/screens/home_screen.dart';
-import 'package:movie_app/features/Onshowing/onshowing_screen.dart';
-import 'package:movie_app/features/Search/search_screen.dart';
-import 'package:movie_app/features/Settings/screen/setting_screen.dart';
+import 'package:movie_app2/features/Yourbooking/booked_screen.dart';
+import 'package:movie_app2/features/Home/screens/home_screen.dart';
+import 'package:movie_app2/features/Onshowing/onshowing_screen.dart';
+import 'package:movie_app2/features/Search/search_screen.dart';
+import 'package:movie_app2/features/Settings/screen/setting_screen.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -31,7 +31,7 @@ class _BottomBarState extends State<BottomBar> {
       ),
       bottomNavigationBar: ClipRRect(
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Blur effect
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), // Blur effect
           child: BottomNavigationBar(
             onTap: (index) {
               setState(() {
@@ -61,11 +61,11 @@ class _BottomBarState extends State<BottomBar> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.book_online),
-                label: 'Your Booking',
+                label: 'Booking',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Settings',
+                icon: Icon(Icons.person),
+                label: 'Profile',
               ),
             ],
           ),

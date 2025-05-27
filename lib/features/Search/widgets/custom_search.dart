@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/Widgets/text_head.dart';
-import 'package:movie_app/config/api_link.dart';
-import 'package:movie_app/core/image/image_app.dart';
-import 'package:movie_app/core/theme/gap.dart';
-import 'package:movie_app/core/theme/radius.dart';
+import 'package:movie_app2/Components/text_head.dart';
+import 'package:movie_app2/core/image/image_app.dart';
+import 'package:movie_app2/core/theme/gap.dart';
+import 'package:movie_app2/core/theme/radius.dart';
+import 'package:movie_app2/models/movies.dart';
 
 class CustomSearch extends StatelessWidget {
-  const CustomSearch({super.key, required this.snapshot});
-  final AsyncSnapshot snapshot;
+  const CustomSearch({super.key, required this.movie});
+  final List<Movies> movie;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.symmetric(
-          horizontal: Gap.sM,
           vertical: Gap.sM,
         ),
         width: double.infinity,
         child: ListView.builder(
-          itemCount: snapshot.data.length,
+          itemCount: movie.length,
           itemBuilder: (ctx, index) {
-            final data = snapshot.data[index];
+            final data = movie[index];
             return Padding(
-              padding: const EdgeInsets.only(top: Gap.sm),
+              padding: const EdgeInsets.only(top: Gap.sM),
               child: SizedBox(
                 width: double.infinity,
                 child: InkWell(
                   onTap: () {
-                    Modular.to.pushNamed("/main/detail/${data.id}");
+                    Modular.to.pushNamed("/main/detail/${data.movieid}");
                   },
                   child: Row(
                     children: [
@@ -37,7 +36,7 @@ class CustomSearch extends StatelessWidget {
                         child: Column(
                           children: [
                             Image.network(
-                              "${ApiLink.imagePath}${data.posterPath}",
+                              data.posterurl,
                               height: 120,
                               width: 100,
                               errorBuilder: (context, error, stackTrace) {
@@ -57,7 +56,7 @@ class CustomSearch extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextHead(
-                                text: data.originalTitle,
+                                text: data.title,
                                 maxLines: 2,
                                 textStyle:
                                     Theme.of(context).textTheme.titleMedium!
@@ -67,9 +66,8 @@ class CustomSearch extends StatelessWidget {
                             Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimary,
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
                                     width: 1.0,
                                     style: BorderStyle.solid),
                                 borderRadius: radius8,
@@ -77,10 +75,10 @@ class CustomSearch extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(Gap.sm),
                                 child: TextHead(
-                                  text: 'Release Date ${data.releaseDate}',
+                                  text: 'Release Date ${data.releasedate}',
                                   textStyle: Theme.of(context)
                                       .textTheme
-                                      .titleMedium!
+                                      .titleSmall!
                                       .copyWith(
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -102,9 +100,10 @@ class CustomSearch extends StatelessWidget {
                           borderRadius: radius50,
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(Gap.sm).copyWith(top: Gap.mL),
+                          padding: const EdgeInsets.all(Gap.sm)
+                              .copyWith(top: Gap.mL),
                           child: Text(
-                            snapshot.data[index].voteAverage.toString(),
+                           data.average.toString(),
                             style: TextStyle(
                               fontSize: 13,
                               color: Theme.of(context).colorScheme.onPrimary,

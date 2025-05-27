@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/Widgets/back_button.dart';
-
-import '../../../Widgets/app_button.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:movie_app2/Components/back_button.dart';
+import 'package:movie_app2/Components/app_button.dart';
+import 'package:movie_app2/models/user.dart';
+import 'package:movie_app2/service/user_service.dart';
 
 class EditScreen extends StatefulWidget {
   const EditScreen({super.key});
@@ -12,50 +15,60 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
-  TextEditingController? _nameController;
-  TextEditingController? _emailController;
-  var _emailValidate = true;
-  var _nameValidate = true;
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _ageController = TextEditingController();
+  final _emailController = TextEditingController();
+  final userService = UserService();
+
+  late Users user;
+  File? _imageFile;
+  String? imageUrl;
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController();
-    _emailController = TextEditingController();
+    user = Modular.args.data["user"];
+    _nameController.text = user.name;
+    _emailController.text = user.email!;
+    _ageController.text = user.age?.toString() ?? '';
+    imageUrl = user.imageurl;
   }
 
   @override
   void dispose() {
-    _nameController?.dispose();
-    _emailController?.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _ageController.dispose();
     super.dispose();
   }
 
-  Future<void> _dialogBuilder(BuildContext context) {
+  // Mở hộp thoại chọn ảnh
+  Future<void> _pickImage(ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      setState(() => _imageFile = File(pickedFile.path));
+    }
+    Modular.to.pop(); // Đóng hộp thoại chọn ảnh
+  }
+
+  // Hiển thị hộp thoại chọn ảnh từ Camera hoặc Gallery
+  Future<void> _showImagePickerDialog(BuildContext context) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: const Text(
-            'Select where You want your picture taken from',
-          ),
-          actions: <Widget>[
+          title: const Text('Chọn nguồn ảnh'),
+          content: const Text('Bạn muốn lấy ảnh từ đâu?'),
+          actions: [
             TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Camera'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              child: const Text('📷 Camera'),
+              onPressed: () => _pickImage(ImageSource.camera),
             ),
             TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Gallery'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              child: const Text('🖼️ Gallery'),
+              onPressed: () => _pickImage(ImageSource.gallery),
             ),
           ],
         );
@@ -63,132 +76,124 @@ class _EditScreenState extends State<EditScreen> {
     );
   }
 
+  // Lưu thay đổi
+  void _saveProfile() async {
+    if (_formKey.currentState!.validate()) {
+      if (_imageFile != null) {
+        imageUrl = await userService.uploadImage(_imageFile!);
+      }
+      // Chỉ kiểm tra username nếu nó đã bị thay đổi
+      if (_nameController.text != user.name) {
+        final nameExists =
+            await userService.isUsernameExists(_nameController.text);
+        if (nameExists) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                  "Username đã được sử dụng! Vui lòng chọn username khác."),
+            ),
+          );
+          return;
+        }
+      }
+   
+
+      // Cập nhật thông tin user vào database
+      await userService.updateCurrentuser(Users(
+        id: user.id,
+        name: _nameController.text,
+        age: int.parse(_ageController.text),
+        imageurl: imageUrl,
+      ));
+      Modular.to.pop();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Thông tin đã được cập nhật!')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
-        leading: BackBind(
-          onPressed: () {
-            //  Modular.to.navigate("/main/setting");
-            Modular.to.pop();
-          },
-        ),
+        title: const Text('Chỉnh sửa hồ sơ'),
+        leading: BackBind(onPressed: () => Modular.to.pop()),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Ảnh đại diện
               Stack(
-                  alignment: Alignment.bottomCenter,
-                  clipBehavior: Clip.none,
-                  children: [
-                    Center(
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(90.0),
-                          child: Image.asset(
-                            "no_image.png",
-                            fit: BoxFit.fill,
-                            height: 170,
-                            width: 170,
-                          )),
-                    ),
-                    Positioned(
-                        right: 170,
-                        bottom: -10,
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.camera_alt_rounded,
-                            size: 26,
-                            color: Color.fromARGB(207, 0, 123, 255),
-                          ),
-                          onPressed: () {
-                            _dialogBuilder(context);
-                          },
-                        ))
-                  ]),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'Name',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color.fromARGB(255, 255, 255, 255)),
-                controller: _nameController ?? TextEditingController(),
-                decoration: InputDecoration(
-                  errorText: _nameValidate ? null : 'Enter Valid Name',
-                  border: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 1.0)),
-                ),
-                onSubmitted: (value) {
-                  setState(() {
-                    if (value.isEmpty) {
-                      _nameValidate = false;
-                    } else {
-                      _nameValidate = true;
-                    }
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'Email',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color.fromARGB(255, 255, 255, 255)),
-                controller: _emailController ?? TextEditingController(),
-                decoration: InputDecoration(
-                  errorText: _emailValidate ? null : 'Enter Valid Email',
-                  border: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 1.0)),
-                ),
-                onSubmitted: (value) {
-                  setState(() {
-                    if (value.isEmpty ||
-                        !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                            .hasMatch(value)) {
-                      _emailValidate = false;
-                    } else {
-                      _emailValidate = true;
-                    }
-                  });
-                },
+                alignment: Alignment.bottomRight,
+                children: [
+                  CircleAvatar(
+                    radius: 80,
+                    backgroundImage: _imageFile != null
+                        ? FileImage(_imageFile!) as ImageProvider
+                        : (imageUrl != null && imageUrl!.isNotEmpty
+                            ? NetworkImage(imageUrl!)
+                            : const AssetImage("assets/no_image.png")
+                                as ImageProvider),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.camera_alt,
+                        color: Colors.blue, size: 28),
+                    onPressed: () => _showImagePickerDialog(context),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: AppButton(
-                  onPressed: () {
-                    Modular.to.pop();
-                  },
-                  text: "Save changes",
+
+              // Ô nhập tên
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Tên',
+                  border: OutlineInputBorder(),
                 ),
-              )
+                validator: (value) =>
+                    value == null || value.isEmpty ? 'Vui lòng nhập tên' : null,
+              ),
+              const SizedBox(height: 16),
+
+              // Ô nhập tuổi
+              TextFormField(
+                controller: _ageController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Tuổi',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Vui lòng nhập tuổi';
+                  }
+                  if (int.tryParse(value) == null || int.tryParse(value)! < 0) return 'Tuổi không hợp lệ';
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+
+              // Ô email (chỉ đọc)
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
+                readOnly: true,
+              ),
+              const SizedBox(height: 24),
+
+              // Nút lưu thay đổi
+              AppButton(
+                onPressed: _saveProfile,
+                text: "Lưu thay đổi",
+              ),
             ],
           ),
         ),

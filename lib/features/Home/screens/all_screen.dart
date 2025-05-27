@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/back_button.dart';
-import 'package:movie_app/home.dart';
+import 'package:movie_app2/Components/back_button.dart';
+import 'package:movie_app2/features/Home/widgets/grid_movie_item.dart';
+import 'package:movie_app2/home.dart';
+import 'package:movie_app2/models/movies.dart';
+import 'package:movie_app2/service/movie_service.dart';
+
 class PopularScreen extends StatefulWidget {
   const PopularScreen({super.key});
 
   @override
   State<PopularScreen> createState() => _PopularScreenState();
 }
+
 class _PopularScreenState extends State<PopularScreen> {
+  final movieService = MovieService();
   List<Movies> getMovie = []; // Danh sách phim
-  final controllerApis = ControllerApi();
   int pages = 1;
   bool isLoading = false;
 
@@ -18,12 +23,14 @@ class _PopularScreenState extends State<PopularScreen> {
     super.initState();
     loadData(); // Tải dữ liệu ban đầu
   }
+
   // Hàm tải dữ liệu
   Future<void> loadData() async {
     if (isLoading) return; // Ngăn chặn tải nhiều lần
     setState(() => isLoading = true);
     try {
-      final movies = await controllerApis.getAllMovie(pages); // Gọi API
+      final movies =
+          await movieService.getmovies(page: pages, limit: 9); // Gọi API
       setState(() {
         getMovie.addAll(movies); // Thêm dữ liệu vào danh sách
         pages++; // Tăng số trang
@@ -37,9 +44,7 @@ class _PopularScreenState extends State<PopularScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const TextHead(
-          text: "All movies",
-        ),
+        title: const Text("All movies"),
         leading: BackBind(
           onPressed: () {
             Modular.to.navigate("/main");

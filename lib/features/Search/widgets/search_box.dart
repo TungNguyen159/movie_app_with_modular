@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/theme/gap.dart';
-import 'package:movie_app/core/theme/radius.dart';
+import 'package:movie_app2/core/theme/gap.dart';
+import 'package:movie_app2/core/theme/radius.dart';
 
 class SearchBox extends StatelessWidget {
   const SearchBox({

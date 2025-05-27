@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/theme/app_color.dart';
+import 'package:movie_app2/core/theme/app_color.dart';
 
 // define name for custom style
 const textBodyStyle = 'textBodyStyle';
@@ -46,6 +46,7 @@ final lightTheme = ThemeData(
     suffixIconColor: lightColorScheme.onPrimary,
     prefixIconColor: lightColorScheme.onPrimary,
   ),
+  
   // outlinedButtonTheme: OutlinedButtonThemeData(
   //   style: ButtonStyle(
   //     foregroundColor:

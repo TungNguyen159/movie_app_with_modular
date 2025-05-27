@@ -1,16 +1,52 @@
 # movie_app
 
-A new Flutter project.
+Movie Booking App
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+🚀 Tính năng chính
 
-A few resources to get you started if this is your first Flutter project:
+    🎽️ Hiển thị danh sách phim từ TMDB API
+    🪑 Đặt chỗ theo sơ đồ ghế
+    ⭐ Đánh giá phim (1–5 sao) sau khi đã đặt và xem
+    📊 Thống kê doanh thu theo tháng (cho admin)
+    🔐 Đăng nhập/Đăng ký với Supabase Auth
+        Thanh toán trực tuyến với vnpay
+        Hỗ trợ trực tuyến giữa nhân viên và người dùng
+        quét mã QR đơn đặt vé
+        Đổi giao diện sáng/tối
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+💠 Công nghệ sử dụng
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    Flutter 
+    Modular(routing)
+    Supabase (Auth, Database, Realtime)
+    Vnpay (cổng thanh toán)
+
+ # Chạy ứng dụng
+    Tải file app-release.apk để chạy chương trình trên máy android
+ # Cài đặt dependencies
+    - flutter clean 
+    - flutter pub get
+ # Chạy chương trình
+    - di chuyển tới thư mục lib chọn main.dart
+    - sau đó sử dụng terminal ghi flutter run (chạy chương trình)
+ # Cập nhật Supabase
+    -Cấu hình các apiKeys, anonkeys, vnpay tại tại D:\movie-app2\.env hoặc D:\movie-app2\assets\.env
+
+## Demo Tài khoản đăng nhập
+
+| Vai trò | Email                      | Mật khẩu    |
+|-------- |----------------------------|-------------|
+| Admin   | tung@gmail.com               123456      |
+| Staff   | hanoi@gmail.com              123456      |
+| Khách   | jacknguyxn1509@gmail.com     123456      |
+
+## Kiểm tra Quên mật khẩu
+    - Vui lòng sử dụng email thật để nhận email từ app
+## Thẻ ngân hàng test
+   - Ngân hàng	NCB
+   - Số thẻ	9704198526191432198
+   - Tên chủ thẻ	NGUYEN VAN A
+   - Ngày phát hành	07/15
+   - Mật khẩu OTP	123456

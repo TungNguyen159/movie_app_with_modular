@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/home.dart';
+import 'package:movie_app2/home.dart';
+import 'package:movie_app2/models/user.dart';
 
 class CustomProfile extends StatelessWidget {
   const CustomProfile({
     super.key,
+    required this.user,
   });
-
+  final Users user;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -14,7 +16,9 @@ class CustomProfile extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                Modular.to.pushNamed("/main/setting/editProfile");
+                Modular.to.pushNamed("/main/setting/editProfile", arguments: {
+                  "user": user,
+                });
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -68,7 +72,10 @@ class CustomProfile extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Modular.to.pushNamed("/main/setting/notification");
+                Modular.to.pushNamed("/main/setting/chat", arguments: {
+                  "customerid": user.id,
+                  "sendername": user.name,
+                });
               },
               child: Container(
                 decoration: const BoxDecoration(
@@ -88,7 +95,7 @@ class CustomProfile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextHead(
-                        text: 'Notification',
+                        text: 'Support online',
                         textStyle: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const Icon(Icons.arrow_right)

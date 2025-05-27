@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movie_app/Widgets/text_head.dart';
-import 'package:movie_app/config/api_link.dart';
-import 'package:movie_app/core/theme/gap.dart';
-import 'package:movie_app/core/theme/radius.dart';
-import 'package:movie_app/models/movie.dart';
+import 'package:movie_app2/Components/text_head.dart';
+import 'package:movie_app2/core/theme/gap.dart';
+import 'package:movie_app2/core/theme/radius.dart';
+import 'package:movie_app2/models/movies.dart';
+
 
 class GridMovieItem extends StatelessWidget {
   const GridMovieItem({
@@ -18,7 +18,7 @@ class GridMovieItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: Gap.xs, vertical: Gap.xs),
       child: InkWell(
         onTap: () {
-          Modular.to.pushNamed("/main/detail/${movies.id}");
+          Modular.to.pushNamed("/main/detail/${movies.movieid}");
         },
         child: Stack(
           children: [
@@ -39,7 +39,7 @@ class GridMovieItem extends StatelessWidget {
                 borderRadius: radius20,
                 image: DecorationImage(
                   image:
-                      NetworkImage("${ApiLink.imagePath}${movies.posterPath}"),
+                        NetworkImage(movies.posterurl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -56,7 +56,7 @@ class GridMovieItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextHead(
-                          text: movies.originalTitle,
+                          text: movies.title,
                           maxLines: 1,
                           textStyle: Theme.of(context)
                               .textTheme
@@ -70,7 +70,7 @@ class GridMovieItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextHead(
-                                text: movies.voteAverage.toString(),
+                                text: movies.average.toString(),
                                 maxLines: 1,
                                 textStyle: Theme.of(context)
                                     .textTheme
