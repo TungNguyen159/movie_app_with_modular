@@ -38,9 +38,9 @@ Movie Booking App
 
 | Vai trò | Email                      | Mật khẩu    |
 |-------- |----------------------------|-------------|
-| Admin   | tung@gmail.com               123456      |
-| Staff   | hanoi@gmail.com              123456      |
-| Khách   | jacknguyxn1509@gmail.com     123456      |
+| Admin   | tung@gmail.com             | 123456      |
+| Staff   | hanoi@gmail.com            | 123456      |
+| Khách   | jacknguyxn1509@gmail.com   | 123456      |
 
 ## Kiểm tra Quên mật khẩu
     - Vui lòng sử dụng email thật để nhận email từ app
