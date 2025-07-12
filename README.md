@@ -23,7 +23,6 @@ Movie Booking App
     Supabase (Auth, Database, Realtime)
     Vnpay (cổng thanh toán)
 ## :iphone: Screens
-:art: The UI is inspired by this [dribbble shot]
 
 Splash Screen | onboaring Screen | Signin Screen |
 :------------:|:-----------:|:--------------:|
