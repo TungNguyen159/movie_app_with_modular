@@ -22,7 +22,24 @@ Movie Booking App
     Modular(routing)
     Supabase (Auth, Database, Realtime)
     Vnpay (cổng thanh toán)
+## :iphone: Screens
+:art: The UI is inspired by this [dribbble shot]
 
+Splash Screen | onboaring Screen | Signin Screen |
+:------------:|:-----------:|:--------------:|
+![](./screenshots/splashscreen.png) | ![](./screenshots/onboarding.png) | ![](./screenshots/signin.png)
+Signup Screen | Home Screen | Movie detail Screen |
+![](./screenshots/signup.png) | ![](./screenshots/mainpage.png) | ![](./screenshots/detail.png)
+Ticket Screen | Checking Screen | billing Screen |
+![](./screenshots/ticket.png) | ![](./screenshots/checking.png) | ![](./screenshots/billing.png)
+Payment vnpay Screen | Confirmation Screen | onshowing Screen |
+![](./screenshots/vnpay.png) | ![](./screenshots/successful.png) | ![](./screenshots/onshowing.png)
+Search Screen | Bookings History Screen | Booking Details Screen |
+![](./screenshots/search.png) | ![](./screenshots/yourbooking.png) | ![](./screenshots/bookingdetail.png)
+Profile Screen | Management Screen | Qr Screen |
+![](./screenshots/profile.png) | ![](./screenshots/management.png) | ![](./screenshots/qrscreen.png)
+Forgot Password Screen | Support online Screen | Darkmode |
+![](./screenshots/forgotpassword.png) | ![](./screenshots/suportonline.png) | ![](./screenshots/darkmode.png)
  # Chạy ứng dụng
     Tải file app-release.apk để chạy chương trình trên máy android
  # Cài đặt dependencies
